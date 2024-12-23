@@ -7,8 +7,6 @@ let canvas = document.getElementById("game")
 // Canvas context
 let ctx
 
-
-
 const getQueryParams = () => {
     const params = {};
     const queryString = window.location.search;
@@ -61,25 +59,27 @@ const setUpCanvas = (canvas) => {
 
 const update = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    x += vxl
+
+
+    if (x+vxl >= 0) {
+        x += vxl
+    }
     x += vxr
-    y += vy
+
+    if (y+vy >= 0) {
+        y += vy
+    }
 
     ctx.fillRect(x,y, 50, 50);
     requestAnimationFrame(update)
 }
 
-/*
 const displayEnd = () => {
-    ctx.beginPath();
-    ctx.rect(currentLevel.end_position[0], currentLevel.end_position[1], 20    ,100);
-    ctx.fillStyle = "blue";
-    ctx.fill();
-    ctx.stroke();
+    ctx.fillRect(currentLevel.end_position[0],currentLevel.end_position[1], 10, 100);
+    requestAnimationFrame(displayEnd)
 }
-*/
 
-const displayLevel = (level) => {
+const displayLevel = () => {
 
     if (canvas) {
 
@@ -87,9 +87,8 @@ const displayLevel = (level) => {
 
         if (ctx) {
             update();
-            //displayEnd();
+            displayEnd();
         }
-
 
     } else {
         console.error('Game canvas not found');
