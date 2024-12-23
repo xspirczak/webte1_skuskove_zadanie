@@ -1,0 +1,71 @@
+[
+  {
+    "id" : 0,
+    "name": "1. Level",
+    "start_position" : [120,120],
+    "end_position" : [1500,500],
+    "difficulty" : "easy",
+    "barriers" : {
+      "0": [11,11],
+      "1" : [11,11],
+      "2" : [11,11],
+      "3" : [11,11]
+    }
+  },
+
+  {
+    "id" : 1,
+    "name": "2. Level",
+    "start_position" : [12,12],
+    "end_position" : [20,20],
+    "difficulty" : "easy",
+    "barriers" : {
+      "0": [11,11],
+      "1" : [11,11],
+      "2" : [11,11],
+      "3" : [11,11]
+    }
+  },
+
+  {
+    "id" : 2,
+    "name": "3. Level",
+    "start_position" : [12,12],
+    "end_position" : [20,20],
+    "difficulty" : "medium",
+    "barriers" : {
+      "0": [11,11],
+      "1" : [11,11],
+      "2" : [11,11],
+      "3" : [11,11]
+    }
+  },
+
+  {
+    "id" : 3,
+    "name": "4. Level",
+    "start_position" : [12,12],
+    "end_position" : [20,20],
+    "difficulty" : "hard",
+    "barriers" : {
+      "0": [11,11],
+      "1" : [11,11],
+      "2" : [11,11],
+      "3" : [11,11]
+    }
+  },
+
+  {
+    "id" : 4,
+    "name": "5. Level",
+    "start_position" : [12,12],
+    "end_position" : [20,20],
+    "difficulty" : "hard",
+    "barriers" : {
+      "0": [11,11],
+      "1" : [11,11],
+      "2" : [11,11],
+      "3" : [11,11]
+    }
+  }
+]
