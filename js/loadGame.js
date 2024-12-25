@@ -78,9 +78,9 @@ const displayBarriers = (imageH, imageV) => {
 
 const checkCollisionBarrier = (playerX, playerY, barrier) => {
     const playerLeft = playerX;
-    const playerRight = playerX + 100;
+    const playerRight = playerX + 80;
     const playerTop = playerY;
-    const playerBottom = playerY + 100;
+    const playerBottom = playerY + 80;
 
     let barrierLeft, barrierRight, barrierTop, barrierBottom;
     if (barrier.orientation === "h") {
@@ -99,15 +99,16 @@ const checkCollisionBarrier = (playerX, playerY, barrier) => {
 };
 
 const checkCollisionEnd = (playerX, playerY, level) => {
-    const playerLeft = playerX+20;
+    const playerLeft = playerX;
     const playerRight = playerX + 80;
-    const playerTop = playerY+20;
-    const playerBottom = playerY + 90;
+    const playerTop = playerY;
+    const playerBottom = playerY + 80;
 
-    const gateLeft = (level.end_position[0] + 5) * SCALE_X;
-    const gateRight = gateLeft + 100 * SCALE_X; // Gate width
-    const gateTop = level.end_position[1] * SCALE_Y;
-    const gateBottom = gateTop + 100 * SCALE_Y; // Gate height
+    const gateLeft = (level.end_position[0] + 15) * SCALE_X;
+    const gateRight = gateLeft + 85 * SCALE_X; // Gate width
+    const gateTop = (level.end_position[1] + 10) * SCALE_Y;
+    const gateBottom = gateTop + 90 * SCALE_Y; // Gate height
+
 
     return !(playerRight <= gateLeft || playerLeft >= gateRight || playerBottom <= gateTop || playerTop >= gateBottom);
 }
@@ -138,7 +139,8 @@ const gameLoop = (imageH, imageV, player, gate) => {
     if (checkCollisionEnd(x,y, currentLevel)) {
         console.log("END")
     }
-    ctx.drawImage(player, x, y, 100, 100);
+
+    ctx.drawImage(player, x, y, 80, 80);
     ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100, 100);
 
     displayBarriers(imageH, imageV);
