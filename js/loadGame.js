@@ -76,33 +76,62 @@ const displayBarriers = (imageH, imageV) => {
     });
 };
 
-const gameLoop = (imageH, imageV) => {
+const checkCollision = (playerX, playerY, barrier) => {
+    const playerLeft = playerX;
+    const playerRight = playerX + 100;
+    const playerTop = playerY;
+    const playerBottom = playerY + 100;
+
+    let barrierLeft, barrierRight, barrierTop, barrierBottom;
+    if (barrier.orientation === "h") {
+        barrierLeft = barrier.pos[0] * SCALE_X;
+        barrierRight = barrierLeft + 80*SCALE_X;
+        barrierTop = barrier.pos[1] * SCALE_Y;
+        barrierBottom = barrierTop + 32*SCALE_Y  ;
+    } else if (barrier.orientation === "v") {
+        barrierLeft = barrier.pos[0] * SCALE_X;
+        barrierRight = barrierLeft + 32*SCALE_X;
+        barrierTop = barrier.pos[1] * SCALE_Y;
+        barrierBottom = barrierTop + 80*SCALE_Y;
+    }
+
+
+    return !(playerRight <= barrierLeft || playerLeft >= barrierRight || playerBottom <= barrierTop || playerTop >= barrierBottom);
+};
+
+const gameLoop = (imageH, imageV, player, gate) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
+
     if (x + vxl >= 0) {
-        x += vxl;
-    }
-    if (x + vxr + 50 <= canvas.width) {
-        x += vxr;
-    }
-    if (y + vy >= 0 && y + vy + 50 <= canvas.height) {
-        y += vy;
+        const nextX = x + vxl;
+        const collided = barriers.some(barrier => checkCollision(nextX, y, barrier));
+        if (!collided) x = nextX;
     }
 
-    ctx.fillStyle = "blue";
-    ctx.fillRect(x, y, 50, 50);
+    if (x + vxr + 100 <= canvas.width) {
+        const nextX = x + vxr;
+        const collided = barriers.some(barrier => checkCollision(nextX, y, barrier));
+        if (!collided) x = nextX;
+    }
 
-    ctx.fillStyle = "green";
-    ctx.fillRect(
-        currentLevel.end_position[0] * SCALE_X,
-        currentLevel.end_position[1] * SCALE_Y,
-        10, 100
-    );
+    if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
+        const nextY = y + vy;
+        const collided = barriers.some(barrier => checkCollision(x, nextY, barrier));
+        if (!collided) y = nextY;
+    }
+
+
+    ctx.drawImage(player, x, y, 100, 100);
+    ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 120, 120);
 
     displayBarriers(imageH, imageV);
 
-    requestAnimationFrame(() => gameLoop(imageH, imageV));
+    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate));
 };
+
+
 
 
 const startGame = () => {
@@ -112,14 +141,19 @@ const startGame = () => {
         if (ctx) {
             const barrierH = new Image();
             const barrierV = new Image();
+            const player = new Image();
+            const gate = new Image();
 
             barrierH.src = 'assets/images/barrier_h.png';
             barrierV.src = 'assets/images/barrier_v.png';
+            player.src = 'assets/images/player.png';
+            gate.src = 'assets/images/gate.png';
+
 
             let loadedImages = 0;
             const checkAllLoaded = () => {
-                if (loadedImages === 2) {
-                    gameLoop(barrierH, barrierV);
+                if (loadedImages === 4) {
+                    gameLoop(barrierH, barrierV, player, gate);
                 }
             };
 
@@ -132,11 +166,27 @@ const startGame = () => {
                 checkAllLoaded();
             };
 
+            player.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+
+            gate.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+
             barrierH.onerror = () => {
                 console.error('Failed to load image:', barrierH.src);
             };
             barrierV.onerror = () => {
                 console.error('Failed to load image:', barrierV.src);
+            };
+            player.onerror = () => {
+                console.error('Failed to load image:', player.src);
+            };
+            gate.onerror = () => {
+                console.error('Failed to load image:', gate.src);
             };
         }
     } else {
