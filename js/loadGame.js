@@ -76,7 +76,7 @@ const displayBarriers = (imageH, imageV) => {
     });
 };
 
-const checkCollision = (playerX, playerY, barrier) => {
+const checkCollisionBarrier = (playerX, playerY, barrier) => {
     const playerLeft = playerX;
     const playerRight = playerX + 100;
     const playerTop = playerY;
@@ -85,19 +85,32 @@ const checkCollision = (playerX, playerY, barrier) => {
     let barrierLeft, barrierRight, barrierTop, barrierBottom;
     if (barrier.orientation === "h") {
         barrierLeft = barrier.pos[0] * SCALE_X;
-        barrierRight = barrierLeft + 80*SCALE_X;
+        barrierRight = barrierLeft + 80 * SCALE_X;
         barrierTop = barrier.pos[1] * SCALE_Y;
-        barrierBottom = barrierTop + 32*SCALE_Y  ;
+        barrierBottom = barrierTop + 32 * SCALE_Y  ;
     } else if (barrier.orientation === "v") {
         barrierLeft = barrier.pos[0] * SCALE_X;
-        barrierRight = barrierLeft + 32*SCALE_X;
+        barrierRight = barrierLeft + 32 * SCALE_X;
         barrierTop = barrier.pos[1] * SCALE_Y;
-        barrierBottom = barrierTop + 80*SCALE_Y;
+        barrierBottom = barrierTop + 80 * SCALE_Y;
     }
-
 
     return !(playerRight <= barrierLeft || playerLeft >= barrierRight || playerBottom <= barrierTop || playerTop >= barrierBottom);
 };
+
+const checkCollisionEnd = (playerX, playerY, level) => {
+    const playerLeft = playerX+20;
+    const playerRight = playerX + 80;
+    const playerTop = playerY+20;
+    const playerBottom = playerY + 90;
+
+    const gateLeft = (level.end_position[0] + 5) * SCALE_X;
+    const gateRight = gateLeft + 100 * SCALE_X; // Gate width
+    const gateTop = level.end_position[1] * SCALE_Y;
+    const gateBottom = gateTop + 100 * SCALE_Y; // Gate height
+
+    return !(playerRight <= gateLeft || playerLeft >= gateRight || playerBottom <= gateTop || playerTop >= gateBottom);
+}
 
 const gameLoop = (imageH, imageV, player, gate) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -106,32 +119,32 @@ const gameLoop = (imageH, imageV, player, gate) => {
 
     if (x + vxl >= 0) {
         const nextX = x + vxl;
-        const collided = barriers.some(barrier => checkCollision(nextX, y, barrier));
+        const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
         if (!collided) x = nextX;
     }
 
     if (x + vxr + 100 <= canvas.width) {
         const nextX = x + vxr;
-        const collided = barriers.some(barrier => checkCollision(nextX, y, barrier));
+        const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
         if (!collided) x = nextX;
     }
 
     if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
         const nextY = y + vy;
-        const collided = barriers.some(barrier => checkCollision(x, nextY, barrier));
+        const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
         if (!collided) y = nextY;
     }
 
-
+    if (checkCollisionEnd(x,y, currentLevel)) {
+        console.log("END")
+    }
     ctx.drawImage(player, x, y, 100, 100);
-    ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 120, 120);
+    ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100, 100);
 
     displayBarriers(imageH, imageV);
 
     requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate));
 };
-
-
 
 
 const startGame = () => {
@@ -179,12 +192,15 @@ const startGame = () => {
             barrierH.onerror = () => {
                 console.error('Failed to load image:', barrierH.src);
             };
+
             barrierV.onerror = () => {
                 console.error('Failed to load image:', barrierV.src);
             };
+
             player.onerror = () => {
                 console.error('Failed to load image:', player.src);
             };
+
             gate.onerror = () => {
                 console.error('Failed to load image:', gate.src);
             };
