@@ -8,6 +8,8 @@ let canvas = document.getElementById("game")
 let ctx
 // Scale that is calculated depending on the device width and height
 let SCALE_X = 1, SCALE_Y = 1
+// Time that it took player to complete level
+let timer = 0
 
 const getQueryParams = () => {
     const params = {};
@@ -105,12 +107,47 @@ const checkCollisionEnd = (playerX, playerY, level) => {
     const playerBottom = playerY + 80;
 
     const gateLeft = (level.end_position[0] + 15) * SCALE_X;
-    const gateRight = gateLeft + 85 * SCALE_X; // Gate width
+    const gateRight = gateLeft + 85 * SCALE_X;
     const gateTop = (level.end_position[1] + 10) * SCALE_Y;
-    const gateBottom = gateTop + 90 * SCALE_Y; // Gate height
+    const gateBottom = gateTop + 90 * SCALE_Y;
 
 
     return !(playerRight <= gateLeft || playerLeft >= gateRight || playerBottom <= gateTop || playerTop >= gateBottom);
+}
+
+// Function to show the modal
+function showLevelCompleteModal(onPlayAgain, onNextLevel) {
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('levelCompleteModal'));
+    modal.show();
+
+    // Attach event listeners to buttons
+    document.getElementById('playAgainButton').onclick = () => {
+        modal.hide();
+        if (onPlayAgain) onPlayAgain();
+    };
+
+    document.getElementById('nextLevelButton').onclick = () => {
+        modal.hide();
+        if (onNextLevel) onNextLevel();
+    };
+}
+
+
+const finishedGame = () => {
+    let levels = JSON.parse(localStorage.getItem("levels"));
+    levels[currentLevel.id] = true;
+    localStorage.setItem("levels", JSON.stringify(levels));
+
+
+    showLevelCompleteModal( () => {
+            const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id)}`;
+            window.location.replace(levelQuery);
+        },
+        () => {
+            const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id+1)}`;
+            window.location.replace(levelQuery);
+        });
 }
 
 const gameLoop = (imageH, imageV, player, gate) => {
@@ -137,7 +174,8 @@ const gameLoop = (imageH, imageV, player, gate) => {
     }
 
     if (checkCollisionEnd(x,y, currentLevel)) {
-        console.log("END")
+        finishedGame()
+        return
     }
 
     ctx.drawImage(player, x, y, 80, 80);

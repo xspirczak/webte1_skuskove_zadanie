@@ -29,7 +29,7 @@
     "id" : 1,
     "name": "2. Level",
     "start_position" : [12,12],
-    "end_position" : [20,20],
+    "end_position" : [1500,500],
     "difficulty" : "easy",
     "barriers" : {
       "0": {
@@ -55,7 +55,7 @@
     "id" : 2,
     "name": "3. Level",
     "start_position" : [12,12],
-    "end_position" : [20,20],
+    "end_position" : [1500,500],
     "difficulty" : "medium",
     "barriers" : {
       "0": {
@@ -81,7 +81,7 @@
     "id" : 3,
     "name": "4. Level",
     "start_position" : [12,12],
-    "end_position" : [20,20],
+    "end_position" : [1500,500],
     "difficulty" : "hard",
     "barriers" : {
       "0": {
@@ -107,7 +107,7 @@
     "id" : 4,
     "name": "5. Level",
     "start_position" : [12,12],
-    "end_position" : [20,20],
+    "end_position" : [1500,500],
     "difficulty" : "hard",
     "barriers" : {
       "0": {
