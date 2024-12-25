@@ -133,6 +133,16 @@ function showLevelCompleteModal(onPlayAgain, onNextLevel) {
     };
 }
 
+const getLevelIdToPlay = () => {
+    const levelsData = JSON.parse(localStorage.getItem('levels'));
+    for(let levelId in levelsData){
+        if(levelsData[levelId] === false){
+            return levelId;
+        }
+    }
+    return Math.floor(Math.random() * 5);
+}
+
 
 const finishedGame = () => {
     let levels = JSON.parse(localStorage.getItem("levels"));
@@ -140,14 +150,23 @@ const finishedGame = () => {
     localStorage.setItem("levels", JSON.stringify(levels));
 
 
-    showLevelCompleteModal( () => {
+    showLevelCompleteModal(
+        () => {
             const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id)}`;
             window.location.replace(levelQuery);
         },
         () => {
-            const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id+1)}`;
-            window.location.replace(levelQuery);
-        });
+            //TODO: zmen tu 4 pls:)
+            if (currentLevel.id === 4) {
+                const levelId = getLevelIdToPlay();
+                const levelQuery = `game.html?levelId=${levelId}`;
+                window.location.replace(levelQuery);
+
+            } else {
+                const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id+1)}`;
+                window.location.replace(levelQuery);
+            }
+    });
 }
 
 const gameLoop = (imageH, imageV, player, gate) => {
