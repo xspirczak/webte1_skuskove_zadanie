@@ -42,7 +42,7 @@ const loadLevels = (levels) => {
             card.className = 'col-md-4 mb-4';
 
             card.innerHTML = `
-                    <div class="card shadow-sm w-75 mx-auto"> <!-- Center the card -->
+                    <div class="card shadow-sm w-75 mx-auto">
                         <div class="card-body d-flex justify-content-between align-items-center">
                             <div>
                                 <h5 class="card-title">${level.name}</h5>

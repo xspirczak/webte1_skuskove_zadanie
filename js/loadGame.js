@@ -6,6 +6,8 @@ let currentLevel
 let canvas = document.getElementById("game")
 // Canvas context
 let ctx
+// Scale that is calculated depending on the device width and height
+let SCALE_X = 1, SCALE_Y = 1
 
 const getQueryParams = () => {
     const params = {};
@@ -48,6 +50,9 @@ const setUpCanvas = (canvas) => {
     const resizeCanvas = () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
+        SCALE_X = canvas.width/1920;
+        SCALE_Y = canvas.height/1080;
+
     };
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -57,41 +62,94 @@ const setUpCanvas = (canvas) => {
     ctx = canvas.getContext("2d")
 }
 
-const update = () => {
+const displayBarriers = (imageH, imageV) => {
+    const barriers = Object.values(currentLevel.barriers);
+
+    barriers.forEach((barrier) => {
+        const image = barrier.orientation === "h" ? imageH : imageV;
+
+        ctx.drawImage(
+            image,
+            barrier.pos[0] * SCALE_X,
+            barrier.pos[1] * SCALE_Y,
+        );
+    });
+};
+
+const gameLoop = (imageH, imageV) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
-    if (x+vxl >= 0) {
-        x += vxl
+    if (x + vxl >= 0) {
+        x += vxl;
     }
-    x += vxr
-
-    if (y+vy >= 0) {
-        y += vy
+    if (x + vxr + 50 <= canvas.width) {
+        x += vxr;
+    }
+    if (y + vy >= 0 && y + vy + 50 <= canvas.height) {
+        y += vy;
     }
 
-    ctx.fillRect(x,y, 50, 50);
-    requestAnimationFrame(update)
-}
+    ctx.fillStyle = "blue";
+    ctx.fillRect(x, y, 50, 50);
 
-const displayEnd = () => {
-    ctx.fillRect(currentLevel.end_position[0],currentLevel.end_position[1], 10, 100);
-    requestAnimationFrame(displayEnd)
-}
+    ctx.fillStyle = "green";
+    ctx.fillRect(
+        currentLevel.end_position[0] * SCALE_X,
+        currentLevel.end_position[1] * SCALE_Y,
+        10, 100
+    );
 
-const displayLevel = () => {
+    displayBarriers(imageH, imageV);
 
+    requestAnimationFrame(() => gameLoop(imageH, imageV));
+};
+
+
+const startGame = () => {
     if (canvas) {
-
         setUpCanvas(canvas);
 
         if (ctx) {
-            update();
-            displayEnd();
-        }
+            const barrierH = new Image();
+            const barrierV = new Image();
 
+            barrierH.src = 'assets/images/barrier_h.png';
+            barrierV.src = 'assets/images/barrier_v.png';
+
+            let loadedImages = 0;
+            const checkAllLoaded = () => {
+                if (loadedImages === 2) {
+                    gameLoop(barrierH, barrierV);
+                }
+            };
+
+            barrierH.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+            barrierV.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+
+            barrierH.onerror = () => {
+                console.error('Failed to load image:', barrierH.src);
+            };
+            barrierV.onerror = () => {
+                console.error('Failed to load image:', barrierV.src);
+            };
+        }
     } else {
         console.error('Game canvas not found');
+    }
+};
+
+
+const displayLevel = () => {
+    if (currentLevel) {
+        startGame();
+    } else {
+        console.error('No level data available');
     }
 };
 
