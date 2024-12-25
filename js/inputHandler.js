@@ -2,6 +2,7 @@ const VELOCITY = 1
 const RESET_VELOCITY = 0
 
 addEventListener("keydown", function(e) {
+    //console.log(e.code)
     //WASD
     if (e.code === 'KeyD') vxr = VELOCITY;
     if (e.code === 'KeyA') vxl = -VELOCITY;
