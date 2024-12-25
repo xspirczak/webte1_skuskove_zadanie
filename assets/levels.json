@@ -7,19 +7,187 @@
     "difficulty" : "easy",
     "barriers" : {
       "0": {
-        "pos" : [11, 11],
+        "pos" : [400, 140],
         "orientation" : "v"
       },
       "1": {
-        "pos" : [500, 500],
-        "orientation" : "h"
+        "pos" : [400, 260],
+        "orientation" : "v"
       },
       "2": {
-        "pos" : [1000, 25],
-        "orientation" : "h"
+        "pos" : [400, 380],
+        "orientation" : "v"
       },
       "3": {
-        "pos" : [400, 35],
+        "pos" : [400, 610],
+        "orientation" : "v"
+      },
+      "4": {
+        "pos" : [400, 730],
+        "orientation" : "v"
+      },
+      "5": {
+        "pos" : [400, 850],
+        "orientation" : "v"
+      },
+      "7": {
+        "pos" : [450, 80],
+        "orientation" : "h"
+      },
+      "8": {
+        "pos" : [570, 80],
+        "orientation" : "h"
+      },
+      "9": {
+        "pos" : [690, 80],
+        "orientation" : "h"
+      },
+      "10": {
+        "pos" : [810, 80],
+        "orientation" : "h"
+      },
+      "11": {
+        "pos" : [930, 80],
+        "orientation" : "h"
+      },
+      "12": {
+        "pos" : [1050, 80],
+        "orientation" : "h"
+      },
+      "13": {
+        "pos" : [1170, 80],
+        "orientation" : "h"
+      },
+      "14": {
+        "pos" : [450, 950],
+        "orientation" : "h"
+      },
+      "15": {
+        "pos" : [570, 950],
+        "orientation" : "h"
+      },
+      "16": {
+        "pos" : [690, 950],
+        "orientation" : "h"
+      },
+      "17": {
+        "pos" : [810, 950],
+        "orientation" : "h"
+      },
+      "18": {
+        "pos" : [930, 950],
+        "orientation" : "h"
+      },
+      "19": {
+        "pos" : [1050, 950],
+        "orientation" : "h"
+      },
+      "20": {
+        "pos" : [1170, 950],
+        "orientation" : "h"
+      },
+      "21": {
+        "pos" : [1260, 140],
+        "orientation" : "v"
+      },
+      "22": {
+        "pos" : [1260, 260],
+        "orientation" : "v"
+      },
+      "23": {
+        "pos" : [1260, 380],
+        "orientation" : "v"
+      },
+      "24": {
+        "pos" : [1260, 610],
+        "orientation" : "v"
+      },
+      "25": {
+        "pos" : [1260, 730],
+        "orientation" : "v"
+      },
+      "26": {
+        "pos" : [1260, 850],
+        "orientation" : "v"
+      },
+      "27": {
+        "pos" : [450, 430],
+        "orientation" : "h"
+      },
+      "28": {
+        "pos" : [690, 430],
+        "orientation" : "v"
+      },
+      "29": {
+        "pos" : [690, 550],
+        "orientation" : "v"
+      },
+      "30": {
+        "pos" : [450, 610],
+        "orientation" : "h"
+      },
+      "31": {
+        "pos" : [550, 750],
+        "orientation" : "v"
+      },
+      "32": {
+        "pos" : [550, 220],
+        "orientation" : "v"
+      },
+      "33": {
+        "pos" : [850, 220],
+        "orientation" : "v"
+      },
+      "34": {
+        "pos" : [850, 750],
+        "orientation" : "v"
+      },
+      "35": {
+        "pos" : [1150, 610],
+        "orientation" : "h"
+      },
+      "36": {
+        "pos" : [1030, 610],
+        "orientation" : "h"
+      },
+      "37": {
+        "pos" : [990, 610],
+        "orientation" : "v"
+      },
+      "38": {
+        "pos" : [990, 730],
+        "orientation" : "v"
+      },
+      "39": {
+        "pos" : [1030, 790],
+        "orientation" : "h"
+      },
+      "40": {
+        "pos" : [730, 520],
+        "orientation" : "h"
+      },
+      "41": {
+        "pos" : [820, 520],
+        "orientation" : "h"
+      },
+      "42": {
+        "pos" : [890, 220],
+        "orientation" : "h"
+      },
+      "43": {
+        "pos" : [1010, 220],
+        "orientation" : "h"
+      },
+      "44": {
+        "pos" : [1100, 220],
+        "orientation" : "v"
+      },
+      "45": {
+        "pos" : [1100, 350],
+        "orientation" : "v"
+      },
+      "46": {
+        "pos" : [1100, 470],
         "orientation" : "v"
       }
     }
@@ -28,25 +196,113 @@
   {
     "id" : 1,
     "name": "2. Level",
-    "start_position" : [12,12],
+    "start_position" : [120,120],
     "end_position" : [1500,500],
     "difficulty" : "easy",
     "barriers" : {
       "0": {
-        "pos" : [11, 11],
-        "orientation" : "h"
+        "pos" : [400, 140],
+        "orientation" : "v"
       },
       "1": {
-        "pos" : [500, 500],
-        "orientation" : "h"
+        "pos" : [400, 260],
+        "orientation" : "v"
       },
       "2": {
-        "pos" : [1000, 25],
-        "orientation" : "h"
+        "pos" : [400, 380],
+        "orientation" : "v"
       },
       "3": {
-        "pos" : [400, 35],
+        "pos" : [400, 610],
+        "orientation" : "v"
+      },
+      "4": {
+        "pos" : [400, 730],
+        "orientation" : "v"
+      },
+      "5": {
+        "pos" : [400, 850],
+        "orientation" : "v"
+      },
+      "7": {
+        "pos" : [450, 80],
         "orientation" : "h"
+      },
+      "8": {
+        "pos" : [570, 80],
+        "orientation" : "h"
+      },
+      "9": {
+        "pos" : [690, 80],
+        "orientation" : "h"
+      },
+      "10": {
+        "pos" : [810, 80],
+        "orientation" : "h"
+      },
+      "11": {
+        "pos" : [930, 80],
+        "orientation" : "h"
+      },
+      "12": {
+        "pos" : [1050, 80],
+        "orientation" : "h"
+      },
+      "13": {
+        "pos" : [1170, 80],
+        "orientation" : "h"
+      },
+      "14": {
+        "pos" : [450, 950],
+        "orientation" : "h"
+      },
+      "15": {
+        "pos" : [570, 950],
+        "orientation" : "h"
+      },
+      "16": {
+        "pos" : [690, 950],
+        "orientation" : "h"
+      },
+      "17": {
+        "pos" : [810, 950],
+        "orientation" : "h"
+      },
+      "18": {
+        "pos" : [930, 950],
+        "orientation" : "h"
+      },
+      "19": {
+        "pos" : [1050, 950],
+        "orientation" : "h"
+      },
+      "20": {
+        "pos" : [1170, 950],
+        "orientation" : "h"
+      },
+      "21": {
+        "pos" : [1260, 140],
+        "orientation" : "v"
+      },
+      "22": {
+        "pos" : [1260, 260],
+        "orientation" : "v"
+      },
+      "23": {
+        "pos" : [1260, 380],
+        "orientation" : "v"
+      },
+      "24": {
+        "pos" : [1260, 610],
+        "orientation" : "v"
+      },
+      "25": {
+        "pos" : [1260, 730],
+        "orientation" : "v"
+      },
+      "26": {
+        "pos" : [1260, 850],
+        "orientation" : "v"
       }
     }
   },
@@ -54,25 +310,113 @@
   {
     "id" : 2,
     "name": "3. Level",
-    "start_position" : [12,12],
+    "start_position" : [120,120],
     "end_position" : [1500,500],
     "difficulty" : "medium",
     "barriers" : {
       "0": {
-        "pos" : [11, 11],
-        "orientation" : "h"
+        "pos" : [400, 140],
+        "orientation" : "v"
       },
       "1": {
-        "pos" : [500, 500],
-        "orientation" : "h"
+        "pos" : [400, 260],
+        "orientation" : "v"
       },
       "2": {
-        "pos" : [1000, 25],
-        "orientation" : "h"
+        "pos" : [400, 380],
+        "orientation" : "v"
       },
       "3": {
-        "pos" : [400, 35],
+        "pos" : [400, 610],
+        "orientation" : "v"
+      },
+      "4": {
+        "pos" : [400, 730],
+        "orientation" : "v"
+      },
+      "5": {
+        "pos" : [400, 850],
+        "orientation" : "v"
+      },
+      "7": {
+        "pos" : [450, 80],
         "orientation" : "h"
+      },
+      "8": {
+        "pos" : [570, 80],
+        "orientation" : "h"
+      },
+      "9": {
+        "pos" : [690, 80],
+        "orientation" : "h"
+      },
+      "10": {
+        "pos" : [810, 80],
+        "orientation" : "h"
+      },
+      "11": {
+        "pos" : [930, 80],
+        "orientation" : "h"
+      },
+      "12": {
+        "pos" : [1050, 80],
+        "orientation" : "h"
+      },
+      "13": {
+        "pos" : [1170, 80],
+        "orientation" : "h"
+      },
+      "14": {
+        "pos" : [450, 950],
+        "orientation" : "h"
+      },
+      "15": {
+        "pos" : [570, 950],
+        "orientation" : "h"
+      },
+      "16": {
+        "pos" : [690, 950],
+        "orientation" : "h"
+      },
+      "17": {
+        "pos" : [810, 950],
+        "orientation" : "h"
+      },
+      "18": {
+        "pos" : [930, 950],
+        "orientation" : "h"
+      },
+      "19": {
+        "pos" : [1050, 950],
+        "orientation" : "h"
+      },
+      "20": {
+        "pos" : [1170, 950],
+        "orientation" : "h"
+      },
+      "21": {
+        "pos" : [1260, 140],
+        "orientation" : "v"
+      },
+      "22": {
+        "pos" : [1260, 260],
+        "orientation" : "v"
+      },
+      "23": {
+        "pos" : [1260, 380],
+        "orientation" : "v"
+      },
+      "24": {
+        "pos" : [1260, 610],
+        "orientation" : "v"
+      },
+      "25": {
+        "pos" : [1260, 730],
+        "orientation" : "v"
+      },
+      "26": {
+        "pos" : [1260, 850],
+        "orientation" : "v"
       }
     }
   },
@@ -80,25 +424,113 @@
   {
     "id" : 3,
     "name": "4. Level",
-    "start_position" : [12,12],
+    "start_position" : [120,120],
     "end_position" : [1500,500],
     "difficulty" : "hard",
     "barriers" : {
       "0": {
-        "pos" : [11, 11],
-        "orientation" : "h"
+        "pos" : [400, 140],
+        "orientation" : "v"
       },
       "1": {
-        "pos" : [500, 500],
-        "orientation" : "h"
+        "pos" : [400, 260],
+        "orientation" : "v"
       },
       "2": {
-        "pos" : [1000, 25],
-        "orientation" : "h"
+        "pos" : [400, 380],
+        "orientation" : "v"
       },
       "3": {
-        "pos" : [400, 35],
+        "pos" : [400, 610],
+        "orientation" : "v"
+      },
+      "4": {
+        "pos" : [400, 730],
+        "orientation" : "v"
+      },
+      "5": {
+        "pos" : [400, 850],
+        "orientation" : "v"
+      },
+      "7": {
+        "pos" : [450, 80],
         "orientation" : "h"
+      },
+      "8": {
+        "pos" : [570, 80],
+        "orientation" : "h"
+      },
+      "9": {
+        "pos" : [690, 80],
+        "orientation" : "h"
+      },
+      "10": {
+        "pos" : [810, 80],
+        "orientation" : "h"
+      },
+      "11": {
+        "pos" : [930, 80],
+        "orientation" : "h"
+      },
+      "12": {
+        "pos" : [1050, 80],
+        "orientation" : "h"
+      },
+      "13": {
+        "pos" : [1170, 80],
+        "orientation" : "h"
+      },
+      "14": {
+        "pos" : [450, 950],
+        "orientation" : "h"
+      },
+      "15": {
+        "pos" : [570, 950],
+        "orientation" : "h"
+      },
+      "16": {
+        "pos" : [690, 950],
+        "orientation" : "h"
+      },
+      "17": {
+        "pos" : [810, 950],
+        "orientation" : "h"
+      },
+      "18": {
+        "pos" : [930, 950],
+        "orientation" : "h"
+      },
+      "19": {
+        "pos" : [1050, 950],
+        "orientation" : "h"
+      },
+      "20": {
+        "pos" : [1170, 950],
+        "orientation" : "h"
+      },
+      "21": {
+        "pos" : [1260, 140],
+        "orientation" : "v"
+      },
+      "22": {
+        "pos" : [1260, 260],
+        "orientation" : "v"
+      },
+      "23": {
+        "pos" : [1260, 380],
+        "orientation" : "v"
+      },
+      "24": {
+        "pos" : [1260, 610],
+        "orientation" : "v"
+      },
+      "25": {
+        "pos" : [1260, 730],
+        "orientation" : "v"
+      },
+      "26": {
+        "pos" : [1260, 850],
+        "orientation" : "v"
       }
     }
   },
@@ -106,25 +538,113 @@
   {
     "id" : 4,
     "name": "5. Level",
-    "start_position" : [12,12],
+    "start_position" : [120,120],
     "end_position" : [1500,500],
     "difficulty" : "hard",
     "barriers" : {
       "0": {
-        "pos" : [11, 11],
-        "orientation" : "h"
+        "pos" : [400, 140],
+        "orientation" : "v"
       },
       "1": {
-        "pos" : [500, 500],
-        "orientation" : "h"
+        "pos" : [400, 260],
+        "orientation" : "v"
       },
       "2": {
-        "pos" : [1000, 25],
-        "orientation" : "h"
+        "pos" : [400, 380],
+        "orientation" : "v"
       },
       "3": {
-        "pos" : [400, 35],
+        "pos" : [400, 610],
+        "orientation" : "v"
+      },
+      "4": {
+        "pos" : [400, 730],
+        "orientation" : "v"
+      },
+      "5": {
+        "pos" : [400, 850],
+        "orientation" : "v"
+      },
+      "7": {
+        "pos" : [450, 80],
         "orientation" : "h"
+      },
+      "8": {
+        "pos" : [570, 80],
+        "orientation" : "h"
+      },
+      "9": {
+        "pos" : [690, 80],
+        "orientation" : "h"
+      },
+      "10": {
+        "pos" : [810, 80],
+        "orientation" : "h"
+      },
+      "11": {
+        "pos" : [930, 80],
+        "orientation" : "h"
+      },
+      "12": {
+        "pos" : [1050, 80],
+        "orientation" : "h"
+      },
+      "13": {
+        "pos" : [1170, 80],
+        "orientation" : "h"
+      },
+      "14": {
+        "pos" : [450, 950],
+        "orientation" : "h"
+      },
+      "15": {
+        "pos" : [570, 950],
+        "orientation" : "h"
+      },
+      "16": {
+        "pos" : [690, 950],
+        "orientation" : "h"
+      },
+      "17": {
+        "pos" : [810, 950],
+        "orientation" : "h"
+      },
+      "18": {
+        "pos" : [930, 950],
+        "orientation" : "h"
+      },
+      "19": {
+        "pos" : [1050, 950],
+        "orientation" : "h"
+      },
+      "20": {
+        "pos" : [1170, 950],
+        "orientation" : "h"
+      },
+      "21": {
+        "pos" : [1260, 140],
+        "orientation" : "v"
+      },
+      "22": {
+        "pos" : [1260, 260],
+        "orientation" : "v"
+      },
+      "23": {
+        "pos" : [1260, 380],
+        "orientation" : "v"
+      },
+      "24": {
+        "pos" : [1260, 610],
+        "orientation" : "v"
+      },
+      "25": {
+        "pos" : [1260, 730],
+        "orientation" : "v"
+      },
+      "26": {
+        "pos" : [1260, 850],
+        "orientation" : "v"
       }
     }
   }
