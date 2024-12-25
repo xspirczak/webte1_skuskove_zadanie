@@ -146,7 +146,7 @@ const startGame = () => {
 
             barrierH.src = 'assets/images/barrier_h.png';
             barrierV.src = 'assets/images/barrier_v.png';
-            player.src = 'assets/images/player.png';
+            player.src = 'assets/images/player1.png';
             gate.src = 'assets/images/gate.png';
 
 
