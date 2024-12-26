@@ -818,6 +818,86 @@
       "36": {
         "pos" : [1530, 950],
         "orientation" : "h"
+      },
+      "37": {
+        "pos" : [185, 610],
+        "orientation" : "h"
+      },
+      "38": {
+        "pos" : [270, 610],
+        "orientation" : "v"
+      },
+      "39": {
+        "pos" : [270, 705],
+        "orientation" : "h"
+      },
+      "40": {
+        "pos" : [350, 705],
+        "orientation" : "v"
+      },
+      "41": {
+        "pos" : [350, 800],
+        "orientation" : "h"
+      },
+      "42": {
+        "pos" : [280, 380],
+        "orientation" : "v"
+      },
+      "43": {
+        "pos" : [280, 285],
+        "orientation" : "v"
+      },
+      "44": {
+        "pos" : [280, 245],
+        "orientation" : "h"
+      },
+      "45": {
+        "pos" : [190, 340],
+        "orientation" : "h"
+      },
+      "46": {
+        "pos" : [520, 130],
+        "orientation" : "v"
+      },
+      "47": {
+        "pos" : [520, 225],
+        "orientation" : "v"
+      },
+      "48": {
+        "pos" : [520, 320],
+        "orientation" : "v"
+      },
+      "49": {
+        "pos" : [520, 415],
+        "orientation" : "v"
+      },
+      "50": {
+        "pos" : [440, 395],
+        "orientation" : "h"
+      },
+      "51": {
+        "pos" : [560, 475],
+        "orientation" : "h"
+      },
+      "53": {
+        "pos" : [650, 420],
+        "orientation" : "v"
+      },
+      "54": {
+        "pos" : [650, 130],
+        "orientation" : "v"
+      },
+      "55": {
+        "pos" : [650, 170],
+        "orientation" : "v"
+      },
+      "56": {
+        "pos" : [650, 260],
+        "orientation" : "h"
+      },
+      "57": {
+        "pos" : [730, 260],
+        "orientation" : "h"
       }
     }
   },
