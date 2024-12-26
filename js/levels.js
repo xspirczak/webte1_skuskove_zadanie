@@ -52,7 +52,7 @@ const levelFinished = (levelId) => {
     if (!levelId)
         return true;
 
-    for (let id = 1; id < Object.values(levelsData).length - 1; id++) {
+    for (let id = 1; id < Object.values(levelsData).length ; id++) {
         if (id === levelId) {
             if (levelsData[id-1] || levelId[id])
                 return true;
@@ -61,7 +61,6 @@ const levelFinished = (levelId) => {
         }
     }
 }
-
 
 const loadLevels = (levels) => {
     if (levels && Array.isArray(levels)) {

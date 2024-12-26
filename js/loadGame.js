@@ -121,7 +121,7 @@ function showLevelCompleteModal(onPlayAgain, onNextLevel) {
     const modal = new bootstrap.Modal(document.getElementById('levelCompleteModal'));
     modal.show();
 
-    document.getElementsByClassName('playAgainButton')[0].onclick = () => {
+    document.getElementsByClassName('playAgainButton')[1].onclick = () => {
         modal.hide();
         if (onPlayAgain) onPlayAgain();
     };
@@ -202,7 +202,10 @@ const displayCoins = (image) => {
 }
 
 const addCoin = () => {
+    const coinCounter = document.getElementById("coinCount");
     coins+=1
+
+    coinCounter.innerHTML = coins;
 }
 
 const checkCollisionCoin = (playerX, playerY, level) => {
@@ -249,12 +252,12 @@ const cactusHit = (onPlayAgain, mainMenu) => {
     const modalCactus = new bootstrap.Modal(document.getElementById('cactusHitModal'));
     modalCactus.show();
 
-    document.getElementsByClassName('playAgainButton')[1].onclick = () => {
+    document.getElementsByClassName('playAgainButton')[2].onclick = () => {
         modalCactus.hide();
         if (onPlayAgain) onPlayAgain();
     };
 
-    document.getElementById('titleScreenButton').onclick = () => {
+    document.getElementsByClassName('titleScreenButton')[1].onclick = () => {
         modalCactus.hide();
         if (mainMenu) mainMenu();
     };
@@ -430,4 +433,12 @@ const displayLevel = () => {
     }
 };
 
+document.getElementsByClassName("playAgainButton")[0].addEventListener('click', (event) => {
+    playAgain();
+});
+
+
+document.getElementsByClassName("titleScreenButton")[0].addEventListener('click', (event) => {
+    mainMenu();
+});
 
