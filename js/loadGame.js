@@ -192,7 +192,6 @@ const checkCollisionCoin = (playerX, playerY, level) => {
     const playerTop = playerY;
     const playerBottom = playerY + 80;
 
-
     for (let i = Object.values(level.coins).length - 1; i >= 0; i--) {
         const coin = level.coins[i];
         const coinLeft = coin[0] * SCALE_X;
@@ -206,17 +205,15 @@ const checkCollisionCoin = (playerX, playerY, level) => {
             playerBottom > coinTop &&
             playerTop < coinBottom
         ) {
-            console.log("collision")
-            Object.values(currentLevel.coins).splice(i, 1);
+            let newCoins = Object.values(level.coins);
+            newCoins.splice(i, 1);
+            currentLevel.coins = newCoins
             addCoin();
         }
     }
 };
 
-
-
-
-const gameLoop = (imageH, imageV, player, gate, coin) => {
+const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
@@ -240,6 +237,7 @@ const gameLoop = (imageH, imageV, player, gate, coin) => {
     }
 
     if (currentLevel && currentLevel.coins) {
+        displayCoins(coin)
         checkCollisionCoin(x, y, currentLevel);
     }
 
@@ -248,14 +246,16 @@ const gameLoop = (imageH, imageV, player, gate, coin) => {
         return;
     }
 
+    if (currentLevel && currentLevel.cactus) {
+
+    }
+
     ctx.drawImage(player, x, y, 80, 80);
     ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100, 100);
 
     displayBarriers(imageH, imageV);
 
-    displayCoins(coin)
-
-    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin));
+    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin, cactus));
 };
 
 
@@ -269,18 +269,21 @@ const startGame = () => {
             const player = new Image();
             const gate = new Image();
             const coin = new Image();
+            const cactus = new Image()
 
             barrierH.src = 'assets/images/barrier_h.png';
             barrierV.src = 'assets/images/barrier_v.png';
             player.src = 'assets/images/player1.png';
             gate.src = 'assets/images/gate.png';
             coin.src = 'assets/images/coin.png';
+            cactus.src = 'assets/images/cactus.png';
+
 
 
             let loadedImages = 0;
             const checkAllLoaded = () => {
-                if (loadedImages === 5) {
-                    gameLoop(barrierH, barrierV, player, gate, coin);
+                if (loadedImages === 6) {
+                    gameLoop(barrierH, barrierV, player, gate, coin, cactus);
                 }
             };
 
@@ -308,6 +311,11 @@ const startGame = () => {
                 checkAllLoaded();
             };
 
+            cactus.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+
             barrierH.onerror = () => {
                 console.error('Failed to load image:', barrierH.src);
             };
@@ -326,6 +334,10 @@ const startGame = () => {
 
             coin.onerror = () => {
                 console.error('Failed to load image:', coin.src);
+            };
+
+            cactus.onerror = () => {
+                console.error('Failed to load image:', cactus.src);
             };
         }
     } else {
