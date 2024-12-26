@@ -147,13 +147,24 @@ const playAgain = () => {
     window.location.replace(levelQuery);
 }
 
+const allLevelsFinished = () => {
+    const levelsData = JSON.parse(localStorage.getItem('levels'));
+    for(let levelId in levelsData){
+        if(levelsData[levelId] === false){
+            return false;
+        }
+    }
+    return true;
+}
+
 const playNextLevel = () => {
-    //TODO: zmen tu 4 pls:)
-    if (currentLevel.id === 4) {
+    const levelsData = JSON.parse(localStorage.getItem('levels'));
+    const levelCnt = Object.keys(levelsData).length;
+
+    if (currentLevel.id === levelCnt-1 || allLevelsFinished() ) {
         const levelId = getLevelIdToPlay();
         const levelQuery = `game.html?levelId=${levelId}`;
         window.location.replace(levelQuery);
-
     } else {
         const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id+1)}`;
         window.location.replace(levelQuery);
