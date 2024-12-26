@@ -121,7 +121,7 @@ function showLevelCompleteModal(onPlayAgain, onNextLevel) {
     const modal = new bootstrap.Modal(document.getElementById('levelCompleteModal'));
     modal.show();
 
-    document.getElementById('playAgainButton').onclick = () => {
+    document.getElementsByClassName('playAgainButton')[0].onclick = () => {
         modal.hide();
         if (onPlayAgain) onPlayAgain();
     };
@@ -142,30 +142,38 @@ const getLevelIdToPlay = () => {
     return Math.floor(Math.random() * 5);
 }
 
+const playAgain = () => {
+    const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id)}`;
+    window.location.replace(levelQuery);
+}
+
+const playNextLevel = () => {
+    //TODO: zmen tu 4 pls:)
+    if (currentLevel.id === 4) {
+        const levelId = getLevelIdToPlay();
+        const levelQuery = `game.html?levelId=${levelId}`;
+        window.location.replace(levelQuery);
+
+    } else {
+        const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id+1)}`;
+        window.location.replace(levelQuery);
+    }
+}
+
+const mainMenu = () => {
+    const levelQuery = `/zadanie_skuska/`;
+    window.location.replace(levelQuery);
+}
 
 const finishedGame = () => {
     let levels = JSON.parse(localStorage.getItem("levels"));
     levels[currentLevel.id] = true;
     localStorage.setItem("levels", JSON.stringify(levels));
 
-
     showLevelCompleteModal(
-        () => {
-            const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id)}`;
-            window.location.replace(levelQuery);
-        },
-        () => {
-            //TODO: zmen tu 4 pls:)
-            if (currentLevel.id === 4) {
-                const levelId = getLevelIdToPlay();
-                const levelQuery = `game.html?levelId=${levelId}`;
-                window.location.replace(levelQuery);
-
-            } else {
-                const levelQuery = `game.html?levelId=${encodeURIComponent(currentLevel.id+1)}`;
-                window.location.replace(levelQuery);
-            }
-    });
+        () => {playAgain()},
+        () => {playNextLevel()}
+    );
 }
 
 const displayCoins = (image) => {
@@ -213,6 +221,62 @@ const checkCollisionCoin = (playerX, playerY, level) => {
     }
 };
 
+const displayCactus = (image) => {
+    const cactuses = Object.values(currentLevel.cactus);
+    cactuses.forEach(cactus => {
+        ctx.drawImage(
+                image,
+                cactus[0] * SCALE_X,
+                cactus[1] * SCALE_Y,
+                60,
+                60
+            );
+    })
+}
+
+const cactusHit = (onPlayAgain, mainMenu) => {
+    const modalCactus = new bootstrap.Modal(document.getElementById('cactusHitModal'));
+    modalCactus.show();
+
+    document.getElementsByClassName('playAgainButton')[1].onclick = () => {
+        modalCactus.hide();
+        if (onPlayAgain) onPlayAgain();
+    };
+
+    document.getElementById('titleScreenButton').onclick = () => {
+        modalCactus.hide();
+        if (mainMenu) mainMenu();
+    };
+}
+
+const checkCollisionCactus = (playerX, playerY, level) => {
+    const playerLeft = playerX;
+    const playerRight = playerX + 80;
+    const playerTop = playerY;
+    const playerBottom = playerY + 80;
+
+
+    for (let i = Object.values(level.cactus).length - 1; i >= 0; i--) {
+        const cactus = level.cactus[i];
+        const cactusLeft = cactus[0] * SCALE_X;
+        const cactusRight = cactusLeft + 60;
+        const cactusTop = cactus[1] * SCALE_Y;
+        const cactusBottom = cactusTop + 60;
+
+        if (
+            playerRight > cactusLeft &&
+            playerLeft < cactusRight &&
+            playerBottom > cactusTop &&
+            playerTop < cactusBottom
+        ) {
+            cactusHit(
+                () => {playAgain()},
+                () => {mainMenu()}
+            );
+        }
+    }
+}
+
 const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -247,7 +311,8 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
     }
 
     if (currentLevel && currentLevel.cactus) {
-
+        displayCactus(cactus);
+        checkCollisionCactus(x,y, currentLevel);
     }
 
     ctx.drawImage(player, x, y, 80, 80);

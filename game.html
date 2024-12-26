@@ -14,7 +14,7 @@
 </head>
 <body>
     <canvas id="game"></canvas>
-
+    <!-- Level Complete Modal -->
     <div class="modal fade" id="levelCompleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -26,11 +26,31 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="nextLevelButton" data-bs-toggle="tooltip" title="Prejsť na ďalšiu úroveň"><i class="fa-solid fa-arrow-right"></i></button>
-                    <button type="button" class="btn btn-primary" id="playAgainButton" data-bs-toggle="tooltip" title="Zopakovať aktuálnu úroveň"><i class="fa-solid fa-rotate-right"></i></button>
+                    <button type="button" class="btn btn-primary playAgainButton" data-bs-toggle="tooltip" title="Zopakovať aktuálnu úroveň"><i class="fa-solid fa-rotate-right"></i></button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Cactus Hit Modal -->
+
+    <div class="modal fade" id="cactusHitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">Aaaaa, trafil si kaktus.</h1>
+                </div>
+                <div class="modal-body">
+                    Skús to ešte raz!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="titleScreenButton" data-bs-toggle="tooltip" title="Prejdi do úvodného menu"><i class="fa-solid fa-house"></i></button>
+                    <button type="button" class="btn btn-primary playAgainButton" data-bs-toggle="tooltip" title="Zopakovať aktuálnu úroveň"><i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="js/loadGame.js"></script>
     <script src="js/inputHandler.js"></script>
 </body>
