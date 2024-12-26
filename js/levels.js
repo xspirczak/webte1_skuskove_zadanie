@@ -46,6 +46,22 @@ const redirectToLevel = (level) => {
     window.location.replace(levelQuery);
 };
 
+const levelFinished = (levelId) => {
+    const levelsData = JSON.parse(localStorage.getItem('levels'));
+
+    if (!levelId)
+        return true;
+
+    for (let id = 1; id < Object.values(levelsData).length - 1; id++) {
+        if (id === levelId) {
+            if (levelsData[id-1] || levelId[id])
+                return true;
+
+            return false;
+        }
+    }
+}
+
 
 const loadLevels = (levels) => {
     if (levels && Array.isArray(levels)) {
@@ -62,12 +78,13 @@ const loadLevels = (levels) => {
                             <div>
                                 <h5 class="card-title">${level.name}</h5>
                                 <p class="card-text mb-0">
-                                    Difficulty: <span class="badge ${badgeColor}">${level.difficulty.toUpperCase()}</span><br>
+                                    Úroveň: <span class="badge ${badgeColor}">${level.difficulty.toUpperCase()}</span><br>
                                 </p>
                             </div>
-                            
-                            <button class="btn btn-primary" id=btn-${level.id}>Hrať</button>
-                        </div>
+                            ${levelFinished(level.id)
+                                ? `<button class="btn btn-primary" id="btn-${level.id}">Hrať</button>`
+                                : `<button class="btn btn-primary" id="btn-${level.id}" data-bs-toggle="tooltip" title="Na odomknutie dokončite predchadzajúci level" disabled><i class="fa-solid fa-lock"></i></button>`
+                            }</div>
                     </div>
                 `;
             levelsDiv.append(card);
