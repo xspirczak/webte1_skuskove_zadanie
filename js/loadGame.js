@@ -10,6 +10,8 @@ let ctx
 let SCALE_X = 1, SCALE_Y = 1
 // Time that it took player to complete level
 let timer = 0
+// Coins player collected each level
+let coins = 0
 
 const getQueryParams = () => {
     const params = {};
@@ -115,13 +117,10 @@ const checkCollisionEnd = (playerX, playerY, level) => {
     return !(playerRight <= gateLeft || playerLeft >= gateRight || playerBottom <= gateTop || playerTop >= gateBottom);
 }
 
-// Function to show the modal
 function showLevelCompleteModal(onPlayAgain, onNextLevel) {
-    // Show the modal
     const modal = new bootstrap.Modal(document.getElementById('levelCompleteModal'));
     modal.show();
 
-    // Attach event listeners to buttons
     document.getElementById('playAgainButton').onclick = () => {
         modal.hide();
         if (onPlayAgain) onPlayAgain();
@@ -169,7 +168,55 @@ const finishedGame = () => {
     });
 }
 
-const gameLoop = (imageH, imageV, player, gate) => {
+const displayCoins = (image) => {
+    const coins = Object.values(currentLevel.coins);
+
+    coins.forEach(coin => {
+        ctx.drawImage(
+            image,
+            coin[0] * SCALE_X,
+            coin[1] * SCALE_Y,
+            50,
+            50
+        );
+    })
+}
+
+const addCoin = () => {
+    coins+=1
+}
+
+const checkCollisionCoin = (playerX, playerY, level) => {
+    const playerLeft = playerX;
+    const playerRight = playerX + 80;
+    const playerTop = playerY;
+    const playerBottom = playerY + 80;
+
+
+    for (let i = Object.values(level.coins).length - 1; i >= 0; i--) {
+        const coin = level.coins[i];
+        const coinLeft = coin[0] * SCALE_X;
+        const coinRight = coinLeft + 50;
+        const coinTop = coin[1] * SCALE_Y;
+        const coinBottom = coinTop + 50;
+
+        if (
+            playerRight > coinLeft &&
+            playerLeft < coinRight &&
+            playerBottom > coinTop &&
+            playerTop < coinBottom
+        ) {
+            console.log("collision")
+            Object.values(currentLevel.coins).splice(i, 1);
+            addCoin();
+        }
+    }
+};
+
+
+
+
+const gameLoop = (imageH, imageV, player, gate, coin) => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
@@ -192,9 +239,13 @@ const gameLoop = (imageH, imageV, player, gate) => {
         if (!collided) y = nextY;
     }
 
+    if (currentLevel && currentLevel.coins) {
+        checkCollisionCoin(x, y, currentLevel);
+    }
+
     if (checkCollisionEnd(x,y, currentLevel)) {
-        finishedGame()
-        return
+        finishedGame();
+        return;
     }
 
     ctx.drawImage(player, x, y, 80, 80);
@@ -202,7 +253,9 @@ const gameLoop = (imageH, imageV, player, gate) => {
 
     displayBarriers(imageH, imageV);
 
-    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate));
+    displayCoins(coin)
+
+    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin));
 };
 
 
@@ -215,17 +268,19 @@ const startGame = () => {
             const barrierV = new Image();
             const player = new Image();
             const gate = new Image();
+            const coin = new Image();
 
             barrierH.src = 'assets/images/barrier_h.png';
             barrierV.src = 'assets/images/barrier_v.png';
             player.src = 'assets/images/player1.png';
             gate.src = 'assets/images/gate.png';
+            coin.src = 'assets/images/coin.png';
 
 
             let loadedImages = 0;
             const checkAllLoaded = () => {
-                if (loadedImages === 4) {
-                    gameLoop(barrierH, barrierV, player, gate);
+                if (loadedImages === 5) {
+                    gameLoop(barrierH, barrierV, player, gate, coin);
                 }
             };
 
@@ -248,6 +303,11 @@ const startGame = () => {
                 checkAllLoaded();
             };
 
+            coin.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+
             barrierH.onerror = () => {
                 console.error('Failed to load image:', barrierH.src);
             };
@@ -262,6 +322,10 @@ const startGame = () => {
 
             gate.onerror = () => {
                 console.error('Failed to load image:', gate.src);
+            };
+
+            coin.onerror = () => {
+                console.error('Failed to load image:', coin.src);
             };
         }
     } else {

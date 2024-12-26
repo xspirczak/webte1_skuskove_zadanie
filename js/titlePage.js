@@ -14,3 +14,4 @@ function play(){
     const levelQuery = `game.html?levelId=${levelId}`;
     window.location.replace(levelQuery);
 }
+

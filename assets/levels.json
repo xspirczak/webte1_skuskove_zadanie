@@ -191,16 +191,10 @@
         "orientation" : "v"
       }
     },
-    "coins" : {
-      "0" : {
-        "pos" : [450, 500]
-      },
-      "1" : {
-        "pos" : [500, 500]
-      },
-      "2" : {
-        "pos" : [550, 500]
-      }
+    "coins": {
+      "0" : [500,150],
+      "1" : [500,500],
+      "2" : [1000,148]
     }
   },
 
@@ -329,22 +323,67 @@
       },
       "30": {
         "pos": [800, 400],
+        "orientation": "h" },
+      "31": {
+        "pos": [500, 500],
+        "orientation": "v"
+      },
+      "32": {
+        "pos": [500, 600],
+        "orientation": "v"
+      },
+      "33": {
+        "pos": [700, 700],
         "orientation": "h"
       },
-      "31": { "pos": [530, 440], "orientation": "v" },
-      "32": { "pos": [530, 540], "orientation": "v" },
-      "33": { "pos": [700, 700], "orientation": "h" },
-      "34": { "pos": [800, 700], "orientation": "h" },
-      "35": { "pos": [1000, 500], "orientation": "v" },
-      "36": { "pos": [1000, 600], "orientation": "v" },
-      "37": { "pos": [1100, 300], "orientation": "h" },
-      "38": { "pos": [1200, 300], "orientation": "h" },
-      "39": { "pos": [600, 800], "orientation": "h" },
-      "40": { "pos": [700, 800], "orientation": "h" },
-      "41": { "pos": [900, 300], "orientation": "v" },
-      "42": { "pos": [900, 400], "orientation": "v" },
-      "43": { "pos": [1100, 700], "orientation": "h" },
-      "44": { "pos": [1200, 700], "orientation": "h" }
+      "34": {
+        "pos": [800, 700],
+        "orientation": "h"
+      },
+      "35": {
+        "pos": [1000, 500],
+        "orientation": "v"
+      },
+      "36": {
+        "pos": [1000, 600],
+        "orientation": "v"
+      },
+      "37": {
+        "pos": [1100, 300],
+        "orientation": "h"
+      },
+      "38": {
+        "pos": [1200, 300],
+        "orientation": "h" },
+      "39": {
+        "pos": [600, 800],
+        "orientation": "h"
+      },
+      "40": {
+        "pos": [700, 800],
+        "orientation": "h"
+      },
+      "41": {
+        "pos": [900, 300],
+        "orientation": "v"
+      },
+      "42": {
+        "pos": [900, 400],
+        "orientation": "v"
+      },
+      "43": {
+        "pos": [1100, 700],
+        "orientation": "h"
+      },
+      "44": {
+        "pos": [1200, 700],
+        "orientation": "h"
+      }
+    },
+    "coins": {
+      "0": [500, 400],
+      "1": [800, 600],
+      "2": [1100, 500]
     }
   },
 
