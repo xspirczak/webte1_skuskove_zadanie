@@ -525,59 +525,59 @@
         "orientation" : "v"
       },
       "27": {
-        "pos": [500, 200],
+        "pos": [550, 240],
         "orientation": "h"
       },
       "28": {
-        "pos": [600, 200],
-        "orientation": "h"
+        "pos": [650, 240],
+        "orientation": "v"
       },
       "29": {
-        "pos": [700, 400],
+        "pos": [700, 300],
         "orientation": "h"
       },
       "30": {
-        "pos": [800, 400],
+        "pos": [800, 300],
         "orientation": "h"
       },
       "31": {
-        "pos": [500, 500],
+        "pos": [530, 500],
         "orientation": "v"
       },
       "32": {
-        "pos": [500, 600],
+        "pos": [530, 600],
         "orientation": "v"
       },
       "33": {
-        "pos": [700, 700],
+        "pos": [720, 700],
         "orientation": "h"
       },
       "34": {
-        "pos": [800, 700],
+        "pos": [820, 700],
         "orientation": "h"
       },
       "35": {
-        "pos": [1000, 500],
+        "pos": [1130, 450],
         "orientation": "v"
       },
       "36": {
-        "pos": [1000, 600],
+        "pos": [1130, 550],
         "orientation": "v"
       },
       "37": {
-        "pos": [1100, 300],
+        "pos": [1070, 230],
         "orientation": "h"
       },
       "38": {
-        "pos": [1200, 300],
+        "pos": [1170, 230],
         "orientation": "h"
       },
       "39": {
-        "pos": [600, 800],
+        "pos": [530, 800],
         "orientation": "h"
       },
       "40": {
-        "pos": [700, 800],
+        "pos": [630, 800],
         "orientation": "h"
       },
       "41": {
@@ -589,93 +589,26 @@
         "orientation": "v"
       },
       "43": {
-        "pos": [1100, 700],
-        "orientation": "h"
+        "pos": [550, 130],
+        "orientation": "v"
       },
       "44": {
-        "pos": [1200, 700],
+        "pos": [1170, 610],
         "orientation": "h"
       },
       "45": {
-        "pos": [450, 300],
+        "pos": [450, 440],
         "orientation": "h"
       },
       "46": {
-        "pos": [550, 300],
+        "pos": [550, 440],
         "orientation": "h"
       },
       "47": {
-        "pos": [950, 600],
-        "orientation": "v"
-      },
-      "48": {
-        "pos": [950, 700],
-        "orientation": "v"
-      },
-      "49": {
-        "pos": [600, 400],
-        "orientation": "h"
-      },
-      "50": {
-        "pos": [650, 400],
-        "orientation": "h"
-      },
-      "51": {
-        "pos": [1150, 400],
-        "orientation": "h"
-      },
-      "52": {
-        "pos": [1250, 400],
-        "orientation": "h"
-      },
-      "53": {
-        "pos": [850, 500],
-        "orientation": "h"
-      },
-      "54": {
-        "pos": [950, 500],
-        "orientation": "h"
-      },
-      "55": {
-        "pos": [650, 600],
-        "orientation": "h"
-      },
-      "56": {
-        "pos": [750, 600],
-        "orientation": "h"
-      },
-      "57": {
-        "pos": [1100, 800],
-        "orientation": "h"
-      },
-      "58": {
-        "pos": [1200, 800],
-        "orientation": "h"
-      },
-      "59": {
-        "pos": [500, 700],
-        "orientation": "v"
-      },
-      "60": {
-        "pos": [500, 800],
-        "orientation": "v"
-      },
-      "61": {
-        "pos": [700, 500],
-        "orientation": "v"
-      },
-      "62": {
-        "pos": [700, 600],
-        "orientation": "v"
-      },
-      "63": {
-        "pos": [1100, 200],
-        "orientation": "v"
-      },
-      "64": {
-        "pos": [1100, 300],
+        "pos": [680, 700],
         "orientation": "v"
       }
+
     },
     "coins": {
       "0": [450, 250],
