@@ -22,11 +22,11 @@ h1 {
     position: relative;
     display: inline-block;
 }
-
-.coinsDisplay {
+/*
+.coinsDisplay{
     margin-bottom: 10px;
     font-weight: bold;
-}
+}*/
 
 .starContainer {
     display: flex;

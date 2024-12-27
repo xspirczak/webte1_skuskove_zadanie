@@ -9,7 +9,8 @@ let ctx
 // Scale that is calculated depending on the device width and height
 let SCALE_X = 1, SCALE_Y = 1
 // Time that it took player to complete level
-let timer = 0
+let levelStartTime = null;
+let levelElapsedTime = null;
 // Coins player collected each level
 let coins = 0
 
@@ -226,7 +227,32 @@ const mainMenu = () => {
     window.location.replace(levelQuery);
 }
 
+let timerInterval = null;
+
+const startTimer = () => {
+    levelStartTime = Date.now();
+    timerInterval = setInterval(displayTimer, 10);
+};
+
+const endTimer = () => {
+    const exactElapsedTime = (Date.now() - levelStartTime) / 1000;
+
+    clearInterval(timerInterval);
+
+    const timer = document.getElementById("timer");
+    timer.style.fontWeight = "bold";
+    timer.innerHTML = exactElapsedTime.toFixed(2);
+};
+
+const displayTimer = () => {
+    const timeElapsedDiv = document.getElementById('timeElapsed');
+    const elapsedTime = (Date.now() - levelStartTime) / 1000;
+    timeElapsedDiv.innerHTML = elapsedTime.toFixed(2);
+};
+
 const finishedGame = () => {
+    endTimer();
+
     let levels = JSON.parse(localStorage.getItem("levels"));
     levels[currentLevel.id] = true;
     localStorage.setItem("levels", JSON.stringify(levels));
@@ -391,7 +417,6 @@ const checkCollisionFlames = (playerX, playerY, level) => {
     for (let i = Object.values(level.moving_fire).length - 1; i >= 0; i--) {
         const flame = level.moving_fire[i];
 
-        console.log(flame)
         const flameLeft = flame.position[0] * SCALE_X;
         const flameRight = flameLeft + 40;
         const flameTop = flame.position[1] * SCALE_Y;
@@ -468,7 +493,6 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
     requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin, cactus, flame));
 };
 
-
 const startGame = () => {
     if (canvas) {
         setUpCanvas(canvas);
@@ -493,6 +517,7 @@ const startGame = () => {
             let loadedImages = 0;
             const checkAllLoaded = () => {
                 if (loadedImages === 7) {
+                    startTimer();
                     gameLoop(barrierH, barrierV, player, gate, coin, cactus, flame);
                 }
             };
