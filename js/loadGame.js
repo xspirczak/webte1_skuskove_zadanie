@@ -298,8 +298,8 @@ const displayCactus = (image) => {
     })
 }
 
-const cactusHit = (onPlayAgain, mainMenu) => {
-    const modalCactus = new bootstrap.Modal(document.getElementById('cactusHitModal'));
+const objectHit = (onPlayAgain, mainMenu) => {
+    const modalCactus = new bootstrap.Modal(document.getElementById('objectHitModal'));
     modalCactus.show();
 
     document.getElementsByClassName('playAgainButton')[2].onclick = () => {
@@ -333,7 +333,7 @@ const checkCollisionCactus = (playerX, playerY, level) => {
             playerBottom > cactusTop &&
             playerTop < cactusBottom
         ) {
-            cactusHit(
+            objectHit(
                 () => {playAgain()},
                 () => {mainMenu()}
             );
@@ -352,6 +352,7 @@ const displayFlames = (image) => {
             40
         );
     })
+
 }
 
 const moveFlames = () => {
@@ -381,6 +382,36 @@ const moveFlames = () => {
     });
 };
 
+const checkCollisionFlames = (playerX, playerY, level) => {
+    const playerLeft = playerX;
+    const playerRight = playerX + 80;
+    const playerTop = playerY;
+    const playerBottom = playerY + 80;
+
+    for (let i = Object.values(level.moving_fire).length - 1; i >= 0; i--) {
+        const flame = level.moving_fire[i];
+
+        console.log(flame)
+        const flameLeft = flame.position[0] * SCALE_X;
+        const flameRight = flameLeft + 40;
+        const flameTop = flame.position[1] * SCALE_Y;
+        const flameBottom = flameTop + 40;
+
+        if (
+            playerRight > flameLeft &&
+            playerLeft < flameRight &&
+            playerBottom > flameTop &&
+            playerTop < flameBottom
+        ) {
+            objectHit(
+                () => {playAgain()},
+                () => {mainMenu()}
+            );
+        }
+
+    }
+
+}
 const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
     const coordsDiv = document.getElementById("coords");
 
@@ -431,6 +462,7 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
     if (currentLevel && currentLevel.moving_fire) {
         displayFlames(flame);
         moveFlames();
+        checkCollisionFlames(x,y,currentLevel);
     }
 
     requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin, cactus, flame));
