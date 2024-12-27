@@ -1296,6 +1296,206 @@
       "36": {
         "pos" : [1530, 950],
         "orientation" : "h"
+      },
+      "37": {
+        "pos" : [180, 610],
+        "orientation" : "h"
+      },
+      "38": {
+        "pos" : [210, 610],
+        "orientation" : "h"
+      },
+      "39": {
+        "pos" : [210, 610],
+        "orientation" : "h"
+      },
+      "40": {
+        "pos" : [280, 780],
+        "orientation" : "h"
+      },
+      "41": {
+        "pos" : [345, 780],
+        "orientation" : "h"
+      },
+      "42": {
+        "pos" : [390, 830],
+        "orientation" : "v"
+      },
+      "43": {
+        "pos" : [390, 685],
+        "orientation" : "v"
+      },
+      "44": {
+        "pos" : [390, 590],
+        "orientation" : "v"
+      },
+      "45": {
+        "pos" : [390, 495],
+        "orientation" : "v"
+      },
+      "46": {
+        "pos" : [340, 460],
+        "orientation" : "h"
+      },
+      "47": {
+        "pos" : [275, 460],
+        "orientation" : "h"
+      },
+      "48": {
+        "pos" : [275, 365],
+        "orientation" : "v"
+      },
+      "49": {
+        "pos" : [180, 220],
+        "orientation" : "h"
+      },
+      "50": {
+        "pos" : [260, 220],
+        "orientation" : "h"
+      },
+      "51": {
+        "pos" : [420, 460],
+        "orientation" : "h"
+      },
+      "52": {
+        "pos" : [450, 460],
+        "orientation" : "h"
+      },
+      "53": {
+        "pos" : [430, 365],
+        "orientation" : "v"
+      },
+      "54": {
+        "pos" : [430, 270],
+        "orientation" : "v"
+      },
+      "55": {
+        "pos" : [430, 230],
+        "orientation" : "v"
+      },
+      "56": {
+        "pos" : [570, 110],
+        "orientation" : "v"
+      },
+      "57": {
+        "pos" : [450, 310],
+        "orientation" : "h"
+      },
+      "58": {
+        "pos" : [530, 310],
+        "orientation" : "h"
+      },
+      "59": {
+        "pos" : [750, 250],
+        "orientation" : "v"
+      },
+      "60": {
+        "pos" : [690, 310],
+        "orientation" : "h"
+      },
+      "61": {
+        "pos" : [750, 220],
+        "orientation" : "h"
+      },
+      "62": {
+        "pos" : [830, 220],
+        "orientation" : "h"
+      },
+      "63": {
+        "pos" : [880, 245],
+        "orientation" : "v"
+      },
+      "64": {
+        "pos" : [880, 340],
+        "orientation" : "v"
+      },
+      "65": {
+        "pos" : [880, 435],
+        "orientation" : "v"
+      },
+      "66": {
+        "pos" : [880, 530],
+        "orientation" : "v"
+      },
+      "67": {
+        "pos" : [880, 625],
+        "orientation" : "v"
+      },
+      "68": {
+        "pos" : [880, 720],
+        "orientation" : "v"
+      },
+      "69": {
+        "pos" : [880, 760],
+        "orientation" : "v"
+      },
+      "70": {
+        "pos" : [800, 460],
+        "orientation" : "h"
+      },
+      "71": {
+        "pos" : [720, 460],
+        "orientation" : "h"
+      },
+      "72": {
+        "pos" : [640, 460],
+        "orientation" : "h"
+      },
+      "73": {
+        "pos" : [640, 500],
+        "orientation" : "v"
+      },
+      "74": {
+        "pos" : [640, 580],
+        "orientation" : "v"
+      },
+      "75": {
+        "pos" : [430, 780],
+        "orientation" : "h"
+      },
+      "76": {
+        "pos" : [510, 780],
+        "orientation" : "h"
+      },
+      "77": {
+        "pos" : [665, 640],
+        "orientation" : "h"
+      },
+      "78": {
+        "pos" : [700, 640],
+        "orientation" : "h"
+      },
+      "79": {
+        "pos" : [760, 640],
+        "orientation" : "v"
+      },
+      "80": {
+        "pos" : [760, 740],
+        "orientation" : "v"
+      },
+      "81": {
+        "pos" : [590, 780],
+        "orientation" : "h"
+      },
+      "82": {
+        "pos" : [900, 710],
+        "orientation" : "h"
+      },
+      "83": {
+        "pos" : [980, 710],
+        "orientation" : "h"
+      },
+      "84": {
+        "pos" : [1000, 860],
+        "orientation" : "v"
+      },
+      "85": {
+        "pos" : [1060, 710],
+        "orientation" : "h"
+      },
+      "86": {
+        "pos" : [1120, 650],
+        "orientation" : "v"
       }
     }
   }
