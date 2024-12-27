@@ -22,6 +22,22 @@ const getLevelIdToPlay = () => {
         localStorage.setItem('levels', JSON.stringify(levelsData));
     }
 
+    if(!localStorage.getItem('coins')){
+        const coinsData = {};
+        levels.forEach(level => {
+            coinsData[level.id] = 0;
+        });
+        localStorage.setItem('coins', JSON.stringify(coinsData));
+    }
+
+    if(!localStorage.getItem('times')){
+        const timesData = {};
+        levels.forEach(level => {
+            timesData[level.id] = -1;
+        });
+        localStorage.setItem('times', JSON.stringify(timesData));
+    }
+
     const levelsData = JSON.parse(localStorage.getItem('levels'));
 
     for(let levelId in levelsData){

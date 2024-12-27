@@ -1,4 +1,4 @@
-const VELOCITY = 5
+const VELOCITY = 2
 const RESET_VELOCITY = 0
 
 addEventListener("keydown", function(e) {

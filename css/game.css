@@ -20,8 +20,8 @@ canvas {
     z-index: 1000;
 }
 
-.coinsDisplay {
-    margin-bottom: 10px;
+.coinsDisplay, .timerDisplay {
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
