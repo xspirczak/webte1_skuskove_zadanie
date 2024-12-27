@@ -341,11 +341,48 @@ const checkCollisionCactus = (playerX, playerY, level) => {
     }
 }
 
-const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
+const displayFlames = (image) => {
+    const flames = Object.values(currentLevel.moving_fire);
+    flames.forEach(flame => {
+        ctx.drawImage(
+            image,
+            flame.position[0] * SCALE_X,
+            flame.position[1] * SCALE_Y,
+            40,
+            40
+        );
+    })
+}
+
+const moveFlames = () => {
+    const flames = Object.values(currentLevel.moving_fire);
+
+    flames.forEach((flame, id) => {
+        if (!flame.directionState) {
+            flame.directionState = 0.5;
+            flame.startPosition = [...flame.position];
+        }
+
+        if (flame.direction === 'x') {
+            flame.position[0] += flame.directionState;
+
+            if (Math.abs(flame.position[0] - flame.startPosition[0]) >= flame.steps) {
+                flame.directionState *= -1;
+            }
+        }
+
+        if (flame.direction === 'y') {
+            flame.position[1] += flame.directionState;
+
+            if (Math.abs(flame.position[1] - flame.startPosition[1]) >= flame.steps) {
+                flame.directionState *= -1;
+            }
+        }
+    });
+};
+
+const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
     const coordsDiv = document.getElementById("coords");
-
-
-
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -391,7 +428,12 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
 
     displayBarriers(imageH, imageV);
 
-    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin, cactus));
+    if (currentLevel && currentLevel.moving_fire) {
+        displayFlames(flame);
+        moveFlames();
+    }
+
+    requestAnimationFrame(() => gameLoop(imageH, imageV, player, gate, coin, cactus, flame));
 };
 
 
@@ -406,6 +448,7 @@ const startGame = () => {
             const gate = new Image();
             const coin = new Image();
             const cactus = new Image()
+            const flame = new Image()
 
             barrierH.src = 'assets/images/barrier_h.png';
             barrierV.src = 'assets/images/barrier_v.png';
@@ -413,13 +456,12 @@ const startGame = () => {
             gate.src = 'assets/images/gate.png';
             coin.src = 'assets/images/coin.png';
             cactus.src = 'assets/images/cactus.png';
-
-
+            flame.src = 'assets/images/flame.png';
 
             let loadedImages = 0;
             const checkAllLoaded = () => {
-                if (loadedImages === 6) {
-                    gameLoop(barrierH, barrierV, player, gate, coin, cactus);
+                if (loadedImages === 7) {
+                    gameLoop(barrierH, barrierV, player, gate, coin, cactus, flame);
                 }
             };
 
@@ -452,6 +494,11 @@ const startGame = () => {
                 checkAllLoaded();
             };
 
+            flame.onload = () => {
+                loadedImages++;
+                checkAllLoaded();
+            };
+
             barrierH.onerror = () => {
                 console.error('Failed to load image:', barrierH.src);
             };
@@ -475,6 +522,10 @@ const startGame = () => {
             cactus.onerror = () => {
                 console.error('Failed to load image:', cactus.src);
             };
+
+            flame.onerror = () => {
+                console.error('Failed to load image:', flame.src);
+            };
         }
     } else {
         console.error('Game canvas not found');
@@ -490,12 +541,12 @@ const displayLevel = () => {
     }
 };
 
-document.getElementsByClassName("playAgainButton")[0].addEventListener('click', (event) => {
+document.getElementsByClassName("playAgainButton")[0].addEventListener('click', () => {
     playAgain();
 });
 
 
-document.getElementsByClassName("titleScreenButton")[0].addEventListener('click', (event) => {
+document.getElementsByClassName("titleScreenButton")[0].addEventListener('click', () => {
     mainMenu();
 });
 

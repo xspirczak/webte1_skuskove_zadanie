@@ -1128,19 +1128,19 @@
     },
     "moving_fire": {
       "0": {
-        "position": [160, 420],
+        "position": [300, 500],
         "direction": "x",
-        "length": 280
+        "steps": 150
       },
       "1": {
-        "position": [685, 340],
+        "position": [920, 440],
         "direction": "x",
-        "length": 265
+        "steps": 230
       },
       "2": {
-        "position": [1275, 720],
+        "position": [1290, 600],
         "direction": "y",
-        "length": 470
+        "steps": 300
       }
     }
 

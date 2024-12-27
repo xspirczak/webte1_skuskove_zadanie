@@ -102,23 +102,24 @@ const loadLevels = (levels) => {
 
             card.innerHTML = `
                     <div class="card shadow-sm w-75 mx-auto">
-                        <div class="card-body d-flex justify-content-between align-items-center">
-                            <div>
+                        <div class="card-body d-flex justify-content-between align-items-center row">
+                            <div class="col-lg-6 col-12">
                                 <h5 class="card-title">${level.name}</h5>
                                 <p class="card-text mb-0">
                                     Úroveň: <span class="badge ${badgeColor}">${level.difficulty.toUpperCase()}</span><br>
                                 </p>
-                                 <div class="starContainer mt-2">
+                                 <div class="starContainer justify-content-center mt-2 mb-1">
                                     <div class="star gold goldStar" id="star1"></div>
                                     <div class="star gold goldStar" id="star2"></div>
                                     <div class="star gold goldStar" id="star3"></div>                                    
                                 </div>
                             </div>
-                           
+                           <div class="col-lg-6 col-12">
                             ${levelFinished(level.id)
                                 ? `<button class="btn btn-primary" id="btn-${level.id}">Hrať</button>`
                                 : `<button class="btn btn-primary" id="btn-${level.id}" data-bs-toggle="tooltip" title="Na odomknutie dokončite predchadzajúci level" disabled><i class="fa-solid fa-lock"></i></button>`
                             }</div>
+                            </div>
                     </div>
                 `;
             levelsDiv.append(card);
