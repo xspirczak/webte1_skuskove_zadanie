@@ -33,6 +33,14 @@ const initializeLocalStorage = (levels) => {
         });
         localStorage.setItem('coins', JSON.stringify(coinsData));
     }
+
+    if(!localStorage.getItem('times')){
+        const timesData = {};
+        levels.forEach(level => {
+            timesData[level.id] = -1; // -1 signals no time yet
+        });
+        localStorage.setItem('times', JSON.stringify(timesData));
+    }
 };
 
 
@@ -91,6 +99,19 @@ const displayStars = (levelId) => {
 
 }
 
+const bestTime = (levelId) => {
+    const localStorageTimes = JSON.parse(localStorage.getItem('times'));
+    if (localStorageTimes)
+        return localStorageTimes[levelId]
+}
+
+const displayTimes = (levelId) => {
+    let time = bestTime(levelId);
+    const bestTimeDiv = document.getElementById(`bestTime-${levelId}`);
+    console.log(bestTimeDiv);
+    time === -1 ? bestTimeDiv.innerHTML = '-' : bestTimeDiv.innerHTML = time;
+}
+
 const loadLevels = (levels) => {
     if (levels && Array.isArray(levels)) {
         const levelsDiv = document.getElementById('levels');
@@ -113,6 +134,7 @@ const loadLevels = (levels) => {
                                     <div class="star gold goldStar" id="star2"></div>
                                     <div class="star gold goldStar" id="star3"></div>                                    
                                 </div>
+                                <p class="card-text nb-0"><i class="fa-solid fa-clock"></i> <span id="bestTime-${level.id}"></span></p>
                             </div>
                            <div class="col-lg-6 col-12">
                             ${levelFinished(level.id)
@@ -128,6 +150,7 @@ const loadLevels = (levels) => {
                 redirectToLevel(level)
             });
             displayStars(level.id);
+            displayTimes(level.id);
         });
     } else {
         console.warn('No levels to load or levels is not an array.');

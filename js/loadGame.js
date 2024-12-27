@@ -10,7 +10,8 @@ let ctx
 let SCALE_X = 1, SCALE_Y = 1
 // Time that it took player to complete level
 let levelStartTime = null;
-let levelElapsedTime = null;
+let timerInterval = null;
+let elapsedTime = 0;
 // Coins player collected each level
 let coins = 0
 
@@ -119,19 +120,27 @@ const checkCollisionEnd = (playerX, playerY, level) => {
 }
 
 
-const updateLocalStorageCoins = (level, nCoins) => {
+const updateLocalStorageCoins = (level, nCoins, ) => {
     const localStorageCoins = JSON.parse(localStorage.getItem('coins'));
+    const localStorageTimes = JSON.parse(localStorage.getItem('times'));
     const coinsData = {};
+    const timesData = {};
 
     for (let i = 0; i < Object.values(localStorageCoins).length; i++) {
-        console.log(localStorageCoins[i], nCoins)
         if (i === level.id && localStorageCoins[i] < nCoins) {
             coinsData[i] = nCoins;
+            timesData[i] = elapsedTime.toFixed(2);
         } else {
             coinsData[i] = localStorageCoins[i];
+            if (i === level.id && localStorageTimes[i] > elapsedTime.toFixed(2)) {
+                timesData[i] = elapsedTime.toFixed(2);
+            } else {
+                timesData[i] = localStorageTimes[i];
+            }
         }
     }
     localStorage.setItem('coins', JSON.stringify(coinsData));
+    localStorage.setItem('times', JSON.stringify(timesData));
 
 }
 
@@ -227,28 +236,28 @@ const mainMenu = () => {
     window.location.replace(levelQuery);
 }
 
-let timerInterval = null;
-
 const startTimer = () => {
     levelStartTime = Date.now();
     timerInterval = setInterval(displayTimer, 10);
 };
 
+const displayTimer = () => {
+    const timeElapsedDiv = document.getElementById('timeElapsed');
+    elapsedTime = (Date.now() - levelStartTime) / 1000;
+    timeElapsedDiv.innerHTML = elapsedTime.toFixed(2);
+};
+
 const endTimer = () => {
-    const exactElapsedTime = (Date.now() - levelStartTime) / 1000;
 
     clearInterval(timerInterval);
 
     const timer = document.getElementById("timer");
     timer.style.fontWeight = "bold";
-    timer.innerHTML = exactElapsedTime.toFixed(2);
+    timer.innerHTML = elapsedTime.toFixed(2);
 };
 
-const displayTimer = () => {
-    const timeElapsedDiv = document.getElementById('timeElapsed');
-    const elapsedTime = (Date.now() - levelStartTime) / 1000;
-    timeElapsedDiv.innerHTML = elapsedTime.toFixed(2);
-};
+
+
 
 const finishedGame = () => {
     endTimer();
