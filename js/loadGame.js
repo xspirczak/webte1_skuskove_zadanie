@@ -342,6 +342,11 @@ const checkCollisionCactus = (playerX, playerY, level) => {
 }
 
 const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
+    const coordsDiv = document.getElementById("coords");
+
+
+
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
@@ -378,6 +383,8 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
         displayCactus(cactus);
         checkCollisionCactus(x,y, currentLevel);
     }
+
+    coordsDiv.innerHTML = x + ', ' + y;
 
     ctx.drawImage(player, x, y, 80, 80);
     ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100, 100);
