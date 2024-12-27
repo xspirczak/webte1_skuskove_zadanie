@@ -16,9 +16,36 @@ h1 {
 }
 
 .semicircle {
-    font-size: 3rem; /* Zvýši veľkosť písma */
-    text-align: center; /* Zarovná text na stred */
-    font-weight: bold; /* Zvýši tučnosť písma */
+    font-size: 3rem;
+    text-align: center;
+    font-weight: bold;
     position: relative;
     display: inline-block;
+}
+
+.coinsDisplay {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.starContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.star {
+    width: 25px;
+    height: 25px;
+    background-color: #afa1a1;
+    clip-path: polygon(
+            50% 0%, 61% 35%, 98% 35%,
+            68% 57%, 79% 91%, 50% 70%,
+            21% 91%, 32% 57%, 2% 35%,
+            39% 35%
+    );
+}
+
+.star.gold.filled {
+    background-color: #bfa00b;
+    border-color: black;
 }

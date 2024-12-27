@@ -117,9 +117,59 @@ const checkCollisionEnd = (playerX, playerY, level) => {
     return !(playerRight <= gateLeft || playerLeft >= gateRight || playerBottom <= gateTop || playerTop >= gateBottom);
 }
 
-function showLevelCompleteModal(onPlayAgain, onNextLevel) {
+
+const updateLocalStorageCoins = (level, nCoins) => {
+    const localStorageCoins = JSON.parse(localStorage.getItem('coins'));
+    const coinsData = {};
+
+    for (let i = 0; i < Object.values(localStorageCoins).length; i++) {
+        console.log(localStorageCoins[i], nCoins)
+        if (i === level.id && localStorageCoins[i] < nCoins) {
+            coinsData[i] = nCoins;
+        } else {
+            coinsData[i] = localStorageCoins[i];
+        }
+    }
+    localStorage.setItem('coins', JSON.stringify(coinsData));
+
+}
+
+const updateStars = (collectedCoins, level) => {
+    const coinsLeft = Object.values(level.coins).length;
+    const maxCoins = coinsLeft + coins;
+
+    const star1 = document.getElementsByClassName("goldStar")[0];
+    const star2 = document.getElementsByClassName("goldStar")[1];
+    const star3 = document.getElementsByClassName("goldStar")[2];
+
+    star1.classList.remove("filled");
+    star2.classList.remove("filled");
+    star3.classList.remove("filled");
+
+    if (coins === maxCoins) {
+        star1.classList.add("filled");
+        star2.classList.add("filled");
+        star3.classList.add("filled");
+        updateLocalStorageCoins(currentLevel, 3);
+    } else if (coins === ( maxCoins - 1 ) ) {
+        star1.classList.add("filled");
+        star2.classList.add("filled");
+        updateLocalStorageCoins(currentLevel, 2);
+    } else if (coins === ( maxCoins - 2 ) ) {
+        star1.classList.add("filled");
+        updateLocalStorageCoins(currentLevel, 1);
+    }
+}
+
+const showLevelCompleteModal = (onPlayAgain, onNextLevel) => {
     const modal = new bootstrap.Modal(document.getElementById('levelCompleteModal'));
     modal.show();
+    const coinsDiv = document.getElementById('coins');
+
+    coinsDiv.innerHTML = coins;
+    coinsDiv.style.fontWeight = "bold";
+
+    updateStars(coins, currentLevel);
 
     document.getElementsByClassName('playAgainButton')[1].onclick = () => {
         modal.hide();
@@ -180,7 +230,7 @@ const finishedGame = () => {
     let levels = JSON.parse(localStorage.getItem("levels"));
     levels[currentLevel.id] = true;
     localStorage.setItem("levels", JSON.stringify(levels));
-
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     showLevelCompleteModal(
         () => {playAgain()},
         () => {playNextLevel()}
@@ -292,6 +342,11 @@ const checkCollisionCactus = (playerX, playerY, level) => {
 }
 
 const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
+    const coordsDiv = document.getElementById("coords");
+
+
+
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
@@ -328,6 +383,8 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus) => {
         displayCactus(cactus);
         checkCollisionCactus(x,y, currentLevel);
     }
+
+    coordsDiv.innerHTML = x + ', ' + y;
 
     ctx.drawImage(player, x, y, 80, 80);
     ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100, 100);

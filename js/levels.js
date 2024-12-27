@@ -25,6 +25,14 @@ const initializeLocalStorage = (levels) => {
         });
         localStorage.setItem('levels', JSON.stringify(levelsData));
     }
+
+    if(!localStorage.getItem('coins')){
+        const coinsData = {};
+        levels.forEach(level => {
+            coinsData[level.id] = 0;
+        });
+        localStorage.setItem('coins', JSON.stringify(coinsData));
+    }
 };
 
 
@@ -62,6 +70,27 @@ const levelFinished = (levelId) => {
     }
 }
 
+const coinsCollected = (levelId) => {
+    const localStorageCoins = JSON.parse(localStorage.getItem('coins'));
+    if (localStorageCoins)
+        return localStorageCoins[levelId]
+}
+
+const displayStars = (levelId) => {
+    let coins = coinsCollected(levelId);
+    const starContainer = document.querySelectorAll('.starContainer')[levelId];
+
+    const stars = starContainer.querySelectorAll('.star');
+
+    stars.forEach(star => {
+        if (coins) {
+            star.classList.add('filled');
+            coins -=1;
+        }
+    })
+
+}
+
 const loadLevels = (levels) => {
     if (levels && Array.isArray(levels)) {
         const levelsDiv = document.getElementById('levels');
@@ -79,7 +108,13 @@ const loadLevels = (levels) => {
                                 <p class="card-text mb-0">
                                     Úroveň: <span class="badge ${badgeColor}">${level.difficulty.toUpperCase()}</span><br>
                                 </p>
+                                 <div class="starContainer mt-2">
+                                    <div class="star gold goldStar" id="star1"></div>
+                                    <div class="star gold goldStar" id="star2"></div>
+                                    <div class="star gold goldStar" id="star3"></div>                                    
+                                </div>
                             </div>
+                           
                             ${levelFinished(level.id)
                                 ? `<button class="btn btn-primary" id="btn-${level.id}">Hrať</button>`
                                 : `<button class="btn btn-primary" id="btn-${level.id}" data-bs-toggle="tooltip" title="Na odomknutie dokončite predchadzajúci level" disabled><i class="fa-solid fa-lock"></i></button>`
@@ -87,11 +122,11 @@ const loadLevels = (levels) => {
                     </div>
                 `;
             levelsDiv.append(card);
-
             const button = document.getElementById(`btn-${level.id}`);
             button.addEventListener('click', () => {
                 redirectToLevel(level)
             });
+            displayStars(level.id);
         });
     } else {
         console.warn('No levels to load or levels is not an array.');
