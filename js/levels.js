@@ -8,7 +8,6 @@ const fetchData = async () => {
 
         initializeLocalStorage(levels);
 
-
         loadLevels(levels);
     } catch (error) {
         console.error('Error fetching levels:', error);
@@ -96,7 +95,6 @@ const displayStars = (levelId) => {
             coins -=1;
         }
     })
-
 }
 
 const bestTime = (levelId) => {
@@ -108,7 +106,6 @@ const bestTime = (levelId) => {
 const displayTimes = (levelId) => {
     let time = bestTime(levelId);
     const bestTimeDiv = document.getElementById(`bestTime-${levelId}`);
-    console.log(bestTimeDiv);
     time === -1 ? bestTimeDiv.innerHTML = '-' : bestTimeDiv.innerHTML = time;
 }
 
@@ -139,7 +136,7 @@ const loadLevels = (levels) => {
                            <div class="col-lg-6 col-12">
                             ${levelFinished(level.id)
                                 ? `<button class="btn button-78" id="btn-${level.id}">Hrať</button>`
-                                : `<button class="btn btn-primary" id="btn-${level.id}" data-bs-toggle="tooltip" title="Na odomknutie dokončite predchadzajúci level" disabled><i class="fa-solid fa-lock"></i></button>`
+                                : `<button class="btn btn-danger" id="btn-${level.id}" data-bs-toggle="tooltip" title="Na odomknutie dokončite predchadzajúci level" disabled><i class="fa-solid fa-lock"></i></button>`
                             }</div>
                             </div>
                     </div>

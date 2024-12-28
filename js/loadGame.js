@@ -73,20 +73,24 @@ const displayBarriers = (imageH, imageV) => {
 
     barriers.forEach((barrier) => {
         const image = barrier.orientation === "h" ? imageH : imageV;
+        const width = barrier.orientation === "h" ? 80 : 32;
+        const height = barrier.orientation === "h" ? 32 : 80;
 
         ctx.drawImage(
             image,
             barrier.pos[0] * SCALE_X,
             barrier.pos[1] * SCALE_Y,
+            width * SCALE_X,
+            height * SCALE_X
         );
     });
 };
 
 const checkCollisionBarrier = (playerX, playerY, barrier) => {
     const playerLeft = playerX;
-    const playerRight = playerX + 80;
+    const playerRight = playerX + (80 *SCALE_X);
     const playerTop = playerY;
-    const playerBottom = playerY + 80;
+    const playerBottom = playerY + (80 *SCALE_X);
 
     let barrierLeft, barrierRight, barrierTop, barrierBottom;
     if (barrier.orientation === "h") {
@@ -106,15 +110,14 @@ const checkCollisionBarrier = (playerX, playerY, barrier) => {
 
 const checkCollisionEnd = (playerX, playerY, level) => {
     const playerLeft = playerX;
-    const playerRight = playerX + 80;
+    const playerRight = playerX + (80*SCALE_X);
     const playerTop = playerY;
-    const playerBottom = playerY + 80;
+    const playerBottom = playerY + (80*SCALE_X);
 
     const gateLeft = (level.end_position[0] + 15) * SCALE_X;
     const gateRight = gateLeft + 85 * SCALE_X;
     const gateTop = (level.end_position[1] + 10) * SCALE_Y;
     const gateBottom = gateTop + 90 * SCALE_Y;
-
 
     return !(playerRight <= gateLeft || playerLeft >= gateRight || playerBottom <= gateTop || playerTop >= gateBottom);
 }
@@ -132,7 +135,10 @@ const updateLocalStorageCoins = (level, nCoins, ) => {
             timesData[i] = elapsedTime.toFixed(2);
         } else {
             coinsData[i] = localStorageCoins[i];
-            if (i === level.id && localStorageTimes[i] > elapsedTime.toFixed(2)) {
+            console.log(localStorageTimes[i], -1)
+
+            if (( i === level.id && localStorageTimes[i] > elapsedTime.toFixed(2) ) || ( i === level.id && localStorageTimes[i] === -1 )) {
+                console.log("here")
                 timesData[i] = elapsedTime.toFixed(2);
             } else {
                 timesData[i] = localStorageTimes[i];
@@ -168,6 +174,9 @@ const updateStars = (collectedCoins, level) => {
     } else if (coins === ( maxCoins - 2 ) ) {
         star1.classList.add("filled");
         updateLocalStorageCoins(currentLevel, 1);
+    } else {
+        // just to update time if necessary
+        updateLocalStorageCoins(currentLevel, 0);
     }
 }
 
@@ -256,9 +265,6 @@ const endTimer = () => {
     timer.innerHTML = elapsedTime.toFixed(2);
 };
 
-
-
-
 const finishedGame = () => {
     endTimer();
 
@@ -280,8 +286,8 @@ const displayCoins = (image) => {
             image,
             coin[0] * SCALE_X,
             coin[1] * SCALE_Y,
-            50,
-            50
+            50 * SCALE_X,
+            50 * SCALE_X
         );
     })
 }
@@ -295,16 +301,16 @@ const addCoin = () => {
 
 const checkCollisionCoin = (playerX, playerY, level) => {
     const playerLeft = playerX;
-    const playerRight = playerX + 80;
+    const playerRight = playerX + (80 * SCALE_X);
     const playerTop = playerY;
-    const playerBottom = playerY + 80;
+    const playerBottom = playerY + (80 * SCALE_X);
 
     for (let i = Object.values(level.coins).length - 1; i >= 0; i--) {
         const coin = level.coins[i];
         const coinLeft = coin[0] * SCALE_X;
-        const coinRight = coinLeft + 50;
+        const coinRight = coinLeft + (50*SCALE_X);
         const coinTop = coin[1] * SCALE_Y;
-        const coinBottom = coinTop + 50;
+        const coinBottom = coinTop + (50*SCALE_X);
 
         if (
             playerRight > coinLeft &&
@@ -327,8 +333,8 @@ const displayCactus = (image) => {
                 image,
                 cactus[0] * SCALE_X,
                 cactus[1] * SCALE_Y,
-                60,
-                60
+                60 *SCALE_X,
+                60 *SCALE_X
             );
     })
 }
@@ -350,17 +356,17 @@ const objectHit = (onPlayAgain, mainMenu) => {
 
 const checkCollisionCactus = (playerX, playerY, level) => {
     const playerLeft = playerX;
-    const playerRight = playerX + 80;
+    const playerRight = playerX + (80*SCALE_X);
     const playerTop = playerY;
-    const playerBottom = playerY + 80;
+    const playerBottom = playerY + (80*SCALE_X);
 
 
     for (let i = Object.values(level.cactus).length - 1; i >= 0; i--) {
         const cactus = level.cactus[i];
         const cactusLeft = cactus[0] * SCALE_X;
-        const cactusRight = cactusLeft + 60;
+        const cactusRight = cactusLeft + (60*SCALE_X);
         const cactusTop = cactus[1] * SCALE_Y;
-        const cactusBottom = cactusTop + 60;
+        const cactusBottom = cactusTop + (60*SCALE_X);
 
         if (
             playerRight > cactusLeft &&
@@ -383,8 +389,8 @@ const displayFlames = (image) => {
             image,
             flame.position[0] * SCALE_X,
             flame.position[1] * SCALE_Y,
-            40,
-            40
+            40 * SCALE_X,
+            40 *SCALE_X
         );
     })
 
@@ -393,7 +399,7 @@ const displayFlames = (image) => {
 const moveFlames = () => {
     const flames = Object.values(currentLevel.moving_fire);
 
-    flames.forEach((flame, id) => {
+    flames.forEach((flame) => {
         if (!flame.directionState) {
             flame.directionState = 0.5;
             flame.startPosition = [...flame.position];
@@ -419,17 +425,17 @@ const moveFlames = () => {
 
 const checkCollisionFlames = (playerX, playerY, level) => {
     const playerLeft = playerX;
-    const playerRight = playerX + 80;
+    const playerRight = playerX + (80 * SCALE_X);
     const playerTop = playerY;
-    const playerBottom = playerY + 80;
+    const playerBottom = playerY + (80 * SCALE_X);
 
     for (let i = Object.values(level.moving_fire).length - 1; i >= 0; i--) {
         const flame = level.moving_fire[i];
 
         const flameLeft = flame.position[0] * SCALE_X;
-        const flameRight = flameLeft + 40;
+        const flameRight = flameLeft + (40 * SCALE_X);
         const flameTop = flame.position[1] * SCALE_Y;
-        const flameBottom = flameTop + 40;
+        const flameBottom = flameTop + (40 * SCALE_X);
 
         if (
             playerRight > flameLeft &&
@@ -488,8 +494,8 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
 
     coordsDiv.innerHTML = x + ', ' + y;
 
-    ctx.drawImage(player, x, y, 80, 80);
-    ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100, 100);
+    ctx.drawImage(player, x, y, 80*SCALE_X, 80*SCALE_X);
+    ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100*SCALE_X, 100*SCALE_X);
 
     displayBarriers(imageH, imageV);
 
