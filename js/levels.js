@@ -138,7 +138,7 @@ const loadLevels = (levels) => {
                             </div>
                            <div class="col-lg-6 col-12">
                             ${levelFinished(level.id)
-                                ? `<button class="btn btn-primary" id="btn-${level.id}">Hrať</button>`
+                                ? `<button class="btn button-78" id="btn-${level.id}">Hrať</button>`
                                 : `<button class="btn btn-primary" id="btn-${level.id}" data-bs-toggle="tooltip" title="Na odomknutie dokončite predchadzajúci level" disabled><i class="fa-solid fa-lock"></i></button>`
                             }</div>
                             </div>
