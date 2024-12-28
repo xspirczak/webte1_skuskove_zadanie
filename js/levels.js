@@ -119,7 +119,7 @@ const loadLevels = (levels) => {
             const badgeColor = getBadgeColor(level.difficulty);
 
             const card = document.createElement('div');
-            card.className = 'col-md-4 mb-4';
+            card.className = 'col-md-6 col-xl-4 col-9 mb-4';
 
             card.innerHTML = `
                     <div class="card shadow-sm w-75 mx-auto">
