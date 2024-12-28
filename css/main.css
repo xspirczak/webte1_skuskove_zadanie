@@ -159,3 +159,42 @@ h1 {
     cursor: default;
     opacity: .24;
 }
+
+@media print {
+
+    footer {
+        display: block !important;
+        border-top: 2px solid black !important;
+        padding-top: 10px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    footer .container p {
+        color: black;
+    }
+
+    body, .main-bg {
+        background: white !important;
+        color: black !important;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        text-shadow: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+
+    .button-78 {
+        background: none !important;
+        border: 2px solid black !important;
+        color: black !important;
+        text-align: center !important;
+        padding: 10px !important;
+        display: inline-block;
+        margin: 5px 0;
+    }
+}
+

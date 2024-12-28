@@ -134,7 +134,7 @@ const loadLevels = (levels) => {
                                     <div class="star gold goldStar" id="star2"></div>
                                     <div class="star gold goldStar" id="star3"></div>                                    
                                 </div>
-                                <p class="card-text nb-0"><i class="fa-solid fa-clock"></i> <span id="bestTime-${level.id}"></span></p>
+                                <p class="card-text nb-0"><i class="fa-solid fa-clock"></i> <span id="bestTime-${level.id}"></span> sekúnd</p>
                             </div>
                            <div class="col-lg-6 col-12">
                             ${levelFinished(level.id)
