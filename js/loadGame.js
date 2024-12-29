@@ -484,22 +484,24 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
 
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
 
-    if (x + vxl >= 0) {
-        const nextX = x + vxl;
-        const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
-        if (!collided) x = nextX;
-    }
+    if (!isPaused) {
+        if (x + vxl >= 0) {
+            const nextX = x + vxl;
+            const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
+            if (!collided) x = nextX;
+        }
 
-    if (x + vxr + 100 <= canvas.width) {
-        const nextX = x + vxr;
-        const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
-        if (!collided) x = nextX;
-    }
+        if (x + vxr + 100 <= canvas.width) {
+            const nextX = x + vxr;
+            const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
+            if (!collided) x = nextX;
+        }
 
-    if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
-        const nextY = y + vy;
-        const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
-        if (!collided) y = nextY;
+        if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
+            const nextY = y + vy;
+            const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
+            if (!collided) y = nextY;
+        }
     }
 
     if (currentLevel && currentLevel.coins) {
@@ -526,7 +528,9 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
 
     if (currentLevel && currentLevel.moving_fire) {
         displayFlames(flame);
-        moveFlames();
+        if (!isPaused) {
+            moveFlames();
+        }
         checkCollisionFlames(x,y,currentLevel);
     }
 
@@ -666,4 +670,15 @@ function checkOrientation() {
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
 
-document.getElementsByClassName("pauseGameButton")
+const changingIcon = document.getElementById('changingIcon');
+document.getElementsByClassName("pauseGameButton")[0].addEventListener("click", () => {
+    if (isPaused) {
+        resumeTimer();
+        changingIcon.classList.remove('fa-play');
+        changingIcon.classList.add('fa-pause');
+    } else {
+        pauseTimer();
+        changingIcon.classList.remove('fa-pause');
+        changingIcon.classList.add('fa-play');
+    }
+});
