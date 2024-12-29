@@ -245,8 +245,17 @@ const mainMenu = () => {
     window.location.replace(levelQuery);
 }
 
+let isPaused = false;
+let pausedTime = 0;
+
 const startTimer = () => {
-    levelStartTime = Date.now();
+    if (!isPaused) {
+        levelStartTime = Date.now();
+    } else {
+        levelStartTime = Date.now() - (pausedTime * 1000);
+        isPaused = false;
+    }
+
     timerInterval = setInterval(displayTimer, 10);
 };
 
@@ -256,6 +265,20 @@ const displayTimer = () => {
     timeElapsedDiv.innerHTML = elapsedTime.toFixed(2);
 };
 
+const pauseTimer = () => {
+  if (!isPaused) {
+      clearInterval(timerInterval);
+      pausedTime = elapsedTime;
+      isPaused = true;
+  }
+};
+
+const resumeTimer = () => {
+  if (isPaused) {
+      startTimer();
+  }
+};
+
 const endTimer = () => {
 
     clearInterval(timerInterval);
@@ -263,6 +286,8 @@ const endTimer = () => {
     const timer = document.getElementById("timer");
     timer.style.fontWeight = "bold";
     timer.innerHTML = elapsedTime.toFixed(2);
+    isPaused = false;
+    pausedTime = 0;
 };
 
 const finishedGame = () => {
@@ -622,3 +647,23 @@ document.getElementsByClassName("titleScreenButton")[0].addEventListener('click'
     mainMenu();
 });
 
+
+const modalElement = document.getElementById('orientation-warning');
+const modal = new bootstrap.Modal(modalElement);
+
+function checkOrientation() {
+    if (window.innerHeight > window.innerWidth) {
+        // Portrait mode
+        modal.show();
+        pauseTimer();
+    } else {
+        // Landscape mode
+        modal.hide();
+        resumeTimer();
+    }
+}
+
+window.addEventListener('load', checkOrientation);
+window.addEventListener('resize', checkOrientation);
+
+document.getElementsByClassName("pauseGameButton")

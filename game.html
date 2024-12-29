@@ -24,6 +24,7 @@
         <div id="coords"></div>
         <button class="btn btn-primary playAgainButton"><i class="fa-solid fa-rotate-right"></i></button>
         <button class="btn btn-secondary titleScreenButton"><i class="fa-solid fa-house"></i></button>
+        <button class="btn btn-warning pauseGameButton"><i class="fa-solid fa-pause"></i></button>
     </div>
     <canvas id="game"></canvas>
     <!-- Level Complete Modal -->
@@ -68,6 +69,20 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary titleScreenButton" data-bs-toggle="tooltip" title="Prejdi do úvodného menu"><i class="fa-solid fa-house"></i></button>
                     <button type="button" class="btn btn-primary playAgainButton" data-bs-toggle="tooltip" title="Zopakovať aktuálnu úroveň"><i class="fa-solid fa-rotate-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Orientation warning modal-->
+    <div class="modal fade" id="orientation-warning" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header align-items-center justify-content-center">
+                    <h5 class="modal-title"><i class="fa-duotone fa-solid fa-triangle-exclamation"></i> Otočte zariadenie!</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Pre hranie hry je potrebné otočiť zariadenie na šírku.</p>
                 </div>
             </div>
         </div>
