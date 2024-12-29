@@ -2,7 +2,7 @@
   {
     "id" : 0,
     "name": "1. Level",
-    "start_position" : [120,120],
+    "start_position" : [100,120],
     "end_position" : [1500,500],
     "difficulty" : "easy",
     "barriers" : {
@@ -189,6 +189,22 @@
       "46": {
         "pos" : [1100, 470],
         "orientation" : "v"
+      },
+      "47": {
+        "pos" : [400, 20],
+        "orientation" : "v"
+      },
+      "48": {
+        "pos" : [400, 970],
+        "orientation" : "v"
+      },
+      "49": {
+        "pos" : [1260, 20],
+        "orientation" : "v"
+      },
+      "50": {
+        "pos" : [1260, 970],
+        "orientation" : "v"
       }
     },
     "coins": {
@@ -201,7 +217,7 @@
   {
     "id" : 1,
     "name": "2. Level",
-    "start_position" : [120,120],
+    "start_position" : [100,120],
     "end_position" : [1500,500],
     "difficulty" : "easy",
     "barriers" : {
@@ -400,6 +416,22 @@
       "49": {
         "pos": [1000, 700],
         "orientation": "v"
+      },
+      "50": {
+        "pos" : [400, 20],
+        "orientation" : "v"
+      },
+      "51": {
+        "pos" : [400, 970],
+        "orientation" : "v"
+      },
+      "52": {
+        "pos" : [1260, 20],
+        "orientation" : "v"
+      },
+      "53": {
+        "pos" : [1260, 970],
+        "orientation" : "v"
       }
     },
     "coins": {
@@ -416,7 +448,7 @@
   {
     "id" : 2,
     "name": "3. Level",
-    "start_position" : [120,120],
+    "start_position" : [100,120],
     "end_position" : [1500,500],
     "difficulty" : "medium",
     "barriers" : {
@@ -647,8 +679,23 @@
       "57": {
         "pos": [930, 130],
         "orientation": "v"
+      },
+      "58": {
+        "pos" : [400, 20],
+        "orientation" : "v"
+      },
+      "59": {
+        "pos" : [400, 970],
+        "orientation" : "v"
+      },
+      "60": {
+        "pos" : [1260, 20],
+        "orientation" : "v"
+      },
+      "61": {
+        "pos" : [1260, 970],
+        "orientation" : "v"
       }
-
     },
     "coins": {
       "0": [460, 150],
@@ -671,7 +718,7 @@
   {
     "id" : 3,
     "name": "4. Level",
-    "start_position" : [40,40],
+    "start_position" : [20,40],
     "end_position" : [1750,650],
     "difficulty" : "hard",
     "barriers" : {
@@ -1106,6 +1153,22 @@
       "110": {
         "pos" : [1550, 600],
         "orientation" : "h"
+      },
+      "111": {
+        "pos" : [150, 20],
+        "orientation" : "v"
+      },
+      "112": {
+        "pos" : [150, 970],
+        "orientation" : "v"
+      },
+      "113": {
+        "pos" : [1620, 20],
+        "orientation" : "v"
+      },
+      "114": {
+        "pos" : [1620, 970],
+        "orientation" : "v"
       }
     },
     "coins": {
@@ -1149,7 +1212,7 @@
   {
     "id" : 4,
     "name": "5. Level",
-    "start_position" : [40,40],
+    "start_position" : [20,40],
     "end_position" : [1750,650],
     "difficulty" : "hard",
     "barriers" : {
@@ -1616,6 +1679,22 @@
       "116": {
         "pos" : [1390, 570],
         "orientation" : "h"
+      },
+      "117": {
+        "pos" : [150, 20],
+        "orientation" : "v"
+      },
+      "118": {
+        "pos" : [150, 970],
+        "orientation" : "v"
+      },
+      "119": {
+        "pos" : [1620, 20],
+        "orientation" : "v"
+      },
+      "120": {
+        "pos" : [1620, 970],
+        "orientation" : "v"
       }
     },
     "coins": {
