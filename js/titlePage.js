@@ -3,6 +3,7 @@ let levels;
 const fetchData = async () => {
     try {
         const response = await fetch('../assets/levels.json');
+        //const response = await fetch('https://webte1.fei.stuba.sk/~xspirczak/skuskove_zadanie/assets/levels.json')
         levels = await response.json();
 
     } catch (error) {
