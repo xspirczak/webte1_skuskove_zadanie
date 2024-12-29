@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     y = level.start_position[1]
                     currentLevel = level
                     displayLevel(level);
+                    setUpMouseMovement();
                 } else {
                     console.error('Level not found');
                 }
@@ -702,3 +703,31 @@ document.getElementsByClassName("pauseGameButton")[0].addEventListener("click", 
         changingIcon.classList.add('fa-play');
     }
 });
+
+
+const setUpMouseMovement = () => {
+    canvas.addEventListener("mousemove", (event) => {
+        const rect = canvas.getBoundingClientRect(); // Get canvas bounds
+        let mouseX, mouseY;
+
+        // Get barriers as an array
+        const barriers = Array.isArray(currentLevel.barriers)
+            ? currentLevel.barriers
+            : Object.values(currentLevel.barriers);
+
+        // Calculate mouse position relative to the canvas
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
+
+        // Check collision for each barrier
+        const collided = barriers.some(barrier => checkCollisionBarrier(mouseX - 40, mouseY - 40, barrier));
+
+        // Update cursor position only if there is no collision
+        if (!collided) {
+            x = mouseX - 40;
+            y = mouseY - 40;
+        }
+    });
+};
+
+
