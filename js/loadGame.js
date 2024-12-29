@@ -249,6 +249,7 @@ const playNextLevel = () => {
 
 const mainMenu = () => {
     const levelQuery = `/zadanie_skuska/`;
+    //const levelQuery = '/~xspirczak/skuskove_zadanie/'
     window.location.replace(levelQuery);
 }
 
