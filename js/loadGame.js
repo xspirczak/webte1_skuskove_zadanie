@@ -83,6 +83,10 @@ const displayBarriers = (imageH, imageV) => {
             width * SCALE_X,
             height * SCALE_X
         );
+        ctx.fillRect(barrier.pos[0] * SCALE_X,
+            barrier.pos[1] * SCALE_Y,
+            width * SCALE_X,
+            height * SCALE_X)
     });
 };
 
@@ -91,6 +95,8 @@ const checkCollisionBarrier = (playerX, playerY, barrier) => {
     const playerRight = playerX + (80 *SCALE_X);
     const playerTop = playerY;
     const playerBottom = playerY + (80 *SCALE_X);
+
+    ctx.fillRect(playerLeft,playerTop, playerRight-playerLeft, playerBottom-playerTop )
 
     let barrierLeft, barrierRight, barrierTop, barrierBottom;
     if (barrier.orientation === "h") {
@@ -104,6 +110,8 @@ const checkCollisionBarrier = (playerX, playerY, barrier) => {
         barrierTop = barrier.pos[1] * SCALE_Y;
         barrierBottom = barrierTop + 80 * SCALE_Y;
     }
+
+    ctx.fillRect(barrierLeft,barrierTop, barrierRight-barrierLeft, barrierBottom-barrierTop )
 
     return !(playerRight <= barrierLeft || playerLeft >= barrierRight || playerBottom <= barrierTop || playerTop >= barrierBottom);
 };
@@ -666,4 +674,11 @@ function checkOrientation() {
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
 
-document.getElementsByClassName("pauseGameButton")
+const pauseButton = document.getElementsByClassName("pauseGameButton")[0];
+
+pauseButton.addEventListener("click", () => {
+    if (isPaused)
+        resumeTimer()
+    else
+        pauseTimer();
+})
