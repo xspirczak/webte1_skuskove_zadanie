@@ -68,6 +68,11 @@ const setUpCanvas = (canvas) => {
     ctx = canvas.getContext("2d")
 }
 
+const getMaxCoins = (level) => {
+    const coinsLeft = Object.values(level.coins).length;
+    return coinsLeft + coins;
+}
+
 const displayBarriers = (imageH, imageV) => {
     const barriers = Object.values(currentLevel.barriers);
 
@@ -151,8 +156,7 @@ const updateLocalStorageCoins = (level, nCoins, ) => {
 }
 
 const updateStars = (collectedCoins, level) => {
-    const coinsLeft = Object.values(level.coins).length;
-    const maxCoins = coinsLeft + coins;
+    const maxCoins = getMaxCoins(level)
 
     const star1 = document.getElementsByClassName("goldStar")[0];
     const star2 = document.getElementsByClassName("goldStar")[1];
@@ -185,7 +189,9 @@ const showLevelCompleteModal = (onPlayAgain, onNextLevel) => {
     modal.show();
     const coinsDiv = document.getElementById('coins');
 
-    coinsDiv.innerHTML = coins;
+    const maxCoins = getMaxCoins(currentLevel)
+
+    coinsDiv.innerHTML = coins + '/' + maxCoins;
     coinsDiv.style.fontWeight = "bold";
 
     updateStars(coins, currentLevel);
@@ -329,9 +335,12 @@ const displayCoins = (image) => {
 
 const addCoin = () => {
     const coinCounter = document.getElementById("coinCount");
+
     coins+=1
 
-    coinCounter.innerHTML = coins;
+    const maxCoins = getMaxCoins(currentLevel)
+
+    coinCounter.innerHTML = coins + '/' + maxCoins;
 }
 
 const checkCollisionCoin = (playerX, playerY, level) => {
@@ -548,6 +557,11 @@ const startGame = () => {
         setUpCanvas(canvas);
 
         if (ctx) {
+            // Initial coin counter
+            const coinCounter = document.getElementById("coinCount");
+            const maxCoins = getMaxCoins(currentLevel)
+            coinCounter.innerHTML = 0 + '' + '/' + maxCoins;
+
             const barrierH = new Image();
             const barrierV = new Image();
             const player = new Image();
