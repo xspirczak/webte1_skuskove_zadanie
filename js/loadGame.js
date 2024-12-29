@@ -385,7 +385,6 @@ const checkCollisionCactus = (playerX, playerY, level) => {
     const playerTop = playerY;
     const playerBottom = playerY + (80*SCALE_X);
 
-
     for (let i = Object.values(level.cactus).length - 1; i >= 0; i--) {
         const cactus = level.cactus[i];
         const cactusLeft = cactus[0] * SCALE_X;
@@ -478,7 +477,6 @@ const checkCollisionFlames = (playerX, playerY, level) => {
 
 }
 const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
-    const coordsDiv = document.getElementById("coords");
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -491,13 +489,13 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
             if (!collided) x = nextX;
         }
 
-        if (x + vxr + 100 <= canvas.width) {
+        if (x + vxr + (80*SCALE_X) <= canvas.width) {
             const nextX = x + vxr;
             const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
             if (!collided) x = nextX;
         }
 
-        if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
+        if (y + vy >= 0 && y + vy + (80*SCALE_X) <= canvas.height) {
             const nextY = y + vy;
             const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
             if (!collided) y = nextY;
@@ -518,8 +516,6 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
         displayCactus(cactus);
         checkCollisionCactus(x,y, currentLevel);
     }
-
-    coordsDiv.innerHTML = x + ', ' + y;
 
     ctx.drawImage(player, x, y, 80*SCALE_X, 80*SCALE_X);
     ctx.drawImage(gate, currentLevel.end_position[0] * SCALE_X, currentLevel.end_position[1] * SCALE_Y, 100*SCALE_X, 100*SCALE_X);
