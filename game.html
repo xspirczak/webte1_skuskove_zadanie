@@ -15,16 +15,16 @@
 <body>
     <div id="gameOverlay">
         <div class="timerDisplay">
-            Time: <span id="timeElapsed">0</span>s
+            Čas: <span id="timeElapsed">0</span> sekúnd
         </div>
 
         <div class="coinsDisplay">
-            Coins: <span id="coinCount">0</span>
+            Mince: <span id="coinCount">0</span>
         </div>
         <div id="coords"></div>
         <button class="btn btn-primary playAgainButton"><i class="fa-solid fa-rotate-right"></i></button>
         <button class="btn btn-secondary titleScreenButton"><i class="fa-solid fa-house"></i></button>
-        <button class="btn btn-warning pauseGameButton"><i class="fa-solid fa-pause"></i></button>
+        <button class="btn btn-warning pauseGameButton"><i id="changingIcon" class="fa-solid fa-pause"></i></button>
     </div>
     <canvas id="game"></canvas>
     <!-- Level Complete Modal -->
@@ -75,7 +75,7 @@
     </div>
 
     <!--Orientation warning modal-->
-    <div class="modal fade" id="orientation-warning" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal fade" id="orientation-warning" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" style="display: block;" inert>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header align-items-center justify-content-center">

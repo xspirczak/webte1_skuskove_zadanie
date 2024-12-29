@@ -83,10 +83,6 @@ const displayBarriers = (imageH, imageV) => {
             width * SCALE_X,
             height * SCALE_X
         );
-        ctx.fillRect(barrier.pos[0] * SCALE_X,
-            barrier.pos[1] * SCALE_Y,
-            width * SCALE_X,
-            height * SCALE_X)
     });
 };
 
@@ -95,8 +91,6 @@ const checkCollisionBarrier = (playerX, playerY, barrier) => {
     const playerRight = playerX + (80 *SCALE_X);
     const playerTop = playerY;
     const playerBottom = playerY + (80 *SCALE_X);
-
-    ctx.fillRect(playerLeft,playerTop, playerRight-playerLeft, playerBottom-playerTop )
 
     let barrierLeft, barrierRight, barrierTop, barrierBottom;
     if (barrier.orientation === "h") {
@@ -110,8 +104,6 @@ const checkCollisionBarrier = (playerX, playerY, barrier) => {
         barrierTop = barrier.pos[1] * SCALE_Y;
         barrierBottom = barrierTop + 80 * SCALE_Y;
     }
-
-    ctx.fillRect(barrierLeft,barrierTop, barrierRight-barrierLeft, barrierBottom-barrierTop )
 
     return !(playerRight <= barrierLeft || playerLeft >= barrierRight || playerBottom <= barrierTop || playerTop >= barrierBottom);
 };
@@ -492,22 +484,24 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
 
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
 
-    if (x + vxl >= 0) {
-        const nextX = x + vxl;
-        const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
-        if (!collided) x = nextX;
-    }
+    if (!isPaused) {
+        if (x + vxl >= 0) {
+            const nextX = x + vxl;
+            const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
+            if (!collided) x = nextX;
+        }
 
-    if (x + vxr + 100 <= canvas.width) {
-        const nextX = x + vxr;
-        const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
-        if (!collided) x = nextX;
-    }
+        if (x + vxr + 100 <= canvas.width) {
+            const nextX = x + vxr;
+            const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
+            if (!collided) x = nextX;
+        }
 
-    if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
-        const nextY = y + vy;
-        const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
-        if (!collided) y = nextY;
+        if (y + vy >= 0 && y + vy + 100 <= canvas.height) {
+            const nextY = y + vy;
+            const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
+            if (!collided) y = nextY;
+        }
     }
 
     if (currentLevel && currentLevel.coins) {
@@ -534,7 +528,9 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
 
     if (currentLevel && currentLevel.moving_fire) {
         displayFlames(flame);
-        moveFlames();
+        if (!isPaused) {
+            moveFlames();
+        }
         checkCollisionFlames(x,y,currentLevel);
     }
 
@@ -674,11 +670,15 @@ function checkOrientation() {
 window.addEventListener('load', checkOrientation);
 window.addEventListener('resize', checkOrientation);
 
-const pauseButton = document.getElementsByClassName("pauseGameButton")[0];
-
-pauseButton.addEventListener("click", () => {
-    if (isPaused)
-        resumeTimer()
-    else
+const changingIcon = document.getElementById('changingIcon');
+document.getElementsByClassName("pauseGameButton")[0].addEventListener("click", () => {
+    if (isPaused) {
+        resumeTimer();
+        changingIcon.classList.remove('fa-play');
+        changingIcon.classList.add('fa-pause');
+    } else {
         pauseTimer();
-})
+        changingIcon.classList.remove('fa-pause');
+        changingIcon.classList.add('fa-play');
+    }
+});
