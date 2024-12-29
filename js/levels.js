@@ -105,8 +105,16 @@ const bestTime = (levelId) => {
 
 const displayTimes = (levelId) => {
     let time = bestTime(levelId);
+
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60); // Minúty
+        const seconds = Math.floor(time % 60); // Sekundy
+
+        return `${minutes}.${seconds.toString().padStart(2, '0')}`;
+    };
+
     const bestTimeDiv = document.getElementById(`bestTime-${levelId}`);
-    time === -1 ? bestTimeDiv.innerHTML = '-' : bestTimeDiv.innerHTML = time;
+    time === -1 ? bestTimeDiv.innerHTML = '-' : bestTimeDiv.innerHTML = formatTime(time);
 }
 
 const loadLevels = (levels) => {
@@ -131,7 +139,7 @@ const loadLevels = (levels) => {
                                     <div class="star gold goldStar" id="star2"></div>
                                     <div class="star gold goldStar" id="star3"></div>                                    
                                 </div>
-                                <p class="card-text nb-0"><i class="fa-solid fa-clock"></i> <span id="bestTime-${level.id}"></span> sekúnd</p>
+                                <p class="card-text nb-0"><i class="fa-solid fa-clock"></i> <span id="bestTime-${level.id}"></span> minút</p>
                             </div>
                            <div class="col-lg-6 col-12">
                             ${levelFinished(level.id)

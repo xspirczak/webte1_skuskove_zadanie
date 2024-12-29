@@ -262,7 +262,12 @@ const startTimer = () => {
 const displayTimer = () => {
     const timeElapsedDiv = document.getElementById('timeElapsed');
     elapsedTime = (Date.now() - levelStartTime) / 1000;
-    timeElapsedDiv.innerHTML = elapsedTime.toFixed(2);
+
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = Math.floor(elapsedTime % 60);
+
+    // Zobrazenie času vo formáte MM:SS (s dvoma číslicami pre sekundy)
+    timeElapsedDiv.innerHTML = `${minutes}.${seconds.toString().padStart(2, '0')}`;
 };
 
 const pauseTimer = () => {
@@ -285,7 +290,12 @@ const endTimer = () => {
 
     const timer = document.getElementById("timer");
     timer.style.fontWeight = "bold";
-    timer.innerHTML = elapsedTime.toFixed(2);
+
+    const minutes = Math.floor(elapsedTime / 60);
+    const seconds = Math.floor(elapsedTime % 60);
+
+    timer.innerHTML = `${minutes}.${seconds.toString().padStart(2, '0')}`;
+
     isPaused = false;
     pausedTime = 0;
 };
