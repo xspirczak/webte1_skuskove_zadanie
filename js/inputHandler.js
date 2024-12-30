@@ -1,6 +1,5 @@
-const VELOCITY = 2;
+const VELOCITY = 3;
 const RESET_VELOCITY = 0;
-
 
 addEventListener("keydown", function(e) {
     //WASD
@@ -29,32 +28,31 @@ addEventListener("keyup", function(e) {
 });
 
 function handleDeviceOrientation(event) {
-    const gyroX = event.beta;  // Naklonenie hore/dole
-    const gyroY = event.gamma; // Naklonenie doľava/doprava
+    const gyroY = event.beta;
+    const gyroX = event.gamma;
 
-    const THRESHOLD = 15; // Prah pre detekciu náklonu
+    const THRESHOLD = 8;
 
-    // Ovládanie doprava/doľava (gyroY)
+    // Ovládanie hore/dolu
     if (gyroY > THRESHOLD) {
-        vxr = VELOCITY; // Doprava
+        vxr = -VELOCITY;
     } else if (gyroY < -THRESHOLD) {
-        vxl = -VELOCITY; // Doľava
+        vxl = VELOCITY;
     } else {
         vxr = RESET_VELOCITY;
         vxl = RESET_VELOCITY;
     }
 
-    // Ovládanie hore/dole (gyroX)
+    // Ovládanie doprava/dolava
     if (gyroX > THRESHOLD) {
-        vy = VELOCITY; // Dole
+        vy = -VELOCITY;
     } else if (gyroX < -THRESHOLD) {
-        vy = -VELOCITY; // Hore
+        vy = VELOCITY;
     } else {
         vy = RESET_VELOCITY;
     }
 }
 
-// Pridanie event listeneru pre gyroskop
 function startGyroscope() {
     window.addEventListener("deviceorientation", handleDeviceOrientation);
 }
