@@ -1,8 +1,8 @@
-const VELOCITY = 2
-const RESET_VELOCITY = 0
+const VELOCITY = 2;
+const RESET_VELOCITY = 0;
+
 
 addEventListener("keydown", function(e) {
-    //console.log(e.code)
     //WASD
     if (e.code === 'KeyD') vxr = VELOCITY;
     if (e.code === 'KeyA') vxl = -VELOCITY;
@@ -13,8 +13,7 @@ addEventListener("keydown", function(e) {
     if (e.code === 'ArrowLeft') vxl = -VELOCITY;
     if (e.code === 'ArrowUp') vy = -VELOCITY;
     if (e.code === 'ArrowDown') vy = VELOCITY;
-
-})
+});
 
 addEventListener("keyup", function(e) {
     //WASD
@@ -24,51 +23,45 @@ addEventListener("keyup", function(e) {
     if (e.code === 'KeyS') vy = RESET_VELOCITY;
     //ARROWS
     if (e.code === 'ArrowRight') vxr = RESET_VELOCITY;
-    if (e.code === 'ArrowLeft') vxl = -RESET_VELOCITY;
-    if (e.code === 'ArrowUp') vy = -RESET_VELOCITY;
+    if (e.code === 'ArrowLeft') vxl = RESET_VELOCITY;
+    if (e.code === 'ArrowUp') vy = RESET_VELOCITY;
     if (e.code === 'ArrowDown') vy = RESET_VELOCITY;
+});
 
-})
+// Pridanie detekcie gyroskopu (náklon zariadenia)
+let gyroX = 0;
+let gyroY = 0;
 
-/*
-// Add a listener for the deviceorientation event
-window.addEventListener("deviceorientation", (e) => {
-    // Get the tilt values from the gyroscope
-    const tiltX = e.beta;  // X-axis tilt (front to back)
-    const tiltY = e.gamma; // Y-axis tilt (left to right)
-    // Map the tilt values to movement velocities
-    // For tiltX (beta), positive means tilting forward, negative tilting backward
-    // For tiltY (gamma), positive means tilting right, negative tilting left
+window.addEventListener("deviceorientation", function(event) {
+    // Získanie hodnot beta a gamma
+    gyroX = event.beta;  // Otočenie okolo X osi (horizontálne naklonenie)
+    gyroY = event.gamma; // Otočenie okolo Y osi (vertikálne naklonenie)
 
-    // Horizontal movement (tilting left or right)
-    if (tiltY > 10) {
-        vxr = VELOCITY;  // Move right
-        vxl = 0;
-    } else if (tiltY < -10) {
-        vxl = -VELOCITY;  // Move left
-        vxr = 0;
+    // Nastavenie pohybu na základe gyroskopu
+    // X (beta) - naklonenie doľava a doprava
+    // Y (gamma) - naklonenie hore a dole
+
+    // Mapovanie hodnôt z gyroskopu na pohyb
+    if (gyroX > 15) { // Ak je náklon doľava
+        vxl = -VELOCITY;
+    } else if (gyroX < -15) { // Ak je náklon doprava
+        vxl = VELOCITY;
     } else {
-        vxr = 0;
-        vxl = 0;  // No horizontal movement
+        vxl = RESET_VELOCITY;
     }
 
-    // Vertical movement (tilting forward or backward)
-    if (tiltX > 10) {
-        vy = VELOCITY;  // Move down
-    } else if (tiltX < -10) {
-        vy = -VELOCITY;  // Move up
+    if (gyroY > 15) { // Ak je náklon hore
+        vy = -VELOCITY;
+    } else if (gyroY < -15) { // Ak je náklon dole
+        vy = VELOCITY;
     } else {
-        vy = 0;  // No vertical movement
+        vy = RESET_VELOCITY;
     }
 });
 
-// Optional: Add event listener to stop movement when orientation is reset
-window.addEventListener("deviceorientationabsolute", (e) => {
-    if (e.alpha === 0 && e.beta === 0 && e.gamma === 0) {
-        // Stop movement when device is flat
-        vxr = 0;
-        vxl = 0;
-        vy = 0;
-    }
+// Ak chceš pridať aj resetovanie hodnot, keď nie je pohyb:
+window.addEventListener("deviceorientation", function(event) {
+    // Vyčisti pohyb ak nie je žiadny výrazný náklon
+    if (Math.abs(gyroX) < 10) vxl = RESET_VELOCITY;
+    if (Math.abs(gyroY) < 10) vy = RESET_VELOCITY;
 });
- */
