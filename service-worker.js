@@ -22,9 +22,9 @@ const urlsToCache = [
 ];
 */
 
-
 const CACHE_NAME = "my-game-cache-v1";
 const urlsToCache = [
+    //"manifest.json",
     "index.html",
     "help.html",
     "level.html",
