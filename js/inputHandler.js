@@ -74,6 +74,3 @@ document.getElementById("enable-gyro").addEventListener("click", () => {
         startGyroscope();
     }
 });
-
-
-
