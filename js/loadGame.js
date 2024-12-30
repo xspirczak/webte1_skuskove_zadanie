@@ -15,6 +15,48 @@ let elapsedTime = 0;
 // Coins player collected each level
 let coins = 0
 
+
+const setUpMouseMovement = () => {
+    let wasPressed = false;
+    let mouseMoveHandler;
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "M" || event.key === "m") {
+            if (!wasPressed) {
+
+                wasPressed = true;
+
+                mouseMoveHandler = (event) => {
+                    const rect = canvas.getBoundingClientRect();
+                    let mouseX, mouseY;
+
+                    const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
+
+                    mouseX = event.clientX - rect.left;
+                    mouseY = event.clientY - rect.top;
+
+                    const collided = barriers.some(barrier => checkCollisionBarrier(mouseX - 40, mouseY - 40, barrier));
+                    if (!collided) {
+                        x = mouseX - 40;
+                        y = mouseY - 40;
+                    }
+                };
+
+                canvas.addEventListener("mousemove", mouseMoveHandler);
+            } else {
+                wasPressed = false;
+
+                if (mouseMoveHandler) {
+                    canvas.removeEventListener("mousemove", mouseMoveHandler);
+                    mouseMoveHandler = null;
+                }
+            }
+        }
+    });
+};
+
+
+
 const getQueryParams = () => {
     const params = {};
     const queryString = window.location.search;
@@ -42,6 +84,7 @@ window.addEventListener("DOMContentLoaded", () => {
                     y = level.start_position[1]
                     currentLevel = level
                     displayLevel(level);
+                    setUpMouseMovement();
                 } else {
                     console.error('Level not found');
                 }
