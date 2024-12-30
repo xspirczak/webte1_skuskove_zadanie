@@ -5,6 +5,7 @@
     "start_position" : [100,120],
     "end_position" : [1500,500],
     "difficulty" : "easy",
+    "description" : "Pointou 1. levelu je oboznámiť sa s ovládaním, pozbierať mince a prejsť bludiskom do ciela.",
     "barriers" : {
       "0": {
         "pos" : [400, 140],
@@ -220,6 +221,7 @@
     "start_position" : [100,120],
     "end_position" : [1500,500],
     "difficulty" : "easy",
+    "description" : "V 2. leveli sa nachádzajú kaktusy, na ktoré si treba dávať pozor! Ich dotknutím sa vrátite na začiatok levelu.",
     "barriers" : {
       "0": {
         "pos" : [400, 140],
@@ -451,6 +453,7 @@
     "start_position" : [100,120],
     "end_position" : [1500,500],
     "difficulty" : "medium",
+    "description" : "V 3. leveli sa zvyšuje počet kaktusov, a teda aj obťiažnosť levelu.",
     "barriers" : {
       "0": {
         "pos" : [400, 140],
@@ -721,6 +724,7 @@
     "start_position" : [20,40],
     "end_position" : [1750,650],
     "difficulty" : "hard",
+    "description" : "V 4. leveli sa zväčšilo blúdisko a pribudli aj samo-pohybujúce sa prekážky, ktorým sa je potrebné vyhnúť",
     "barriers" : {
       "0": {
         "pos" : [150, 140],
@@ -1215,6 +1219,7 @@
     "start_position" : [20,40],
     "end_position" : [1750,650],
     "difficulty" : "hard",
+    "description" : "V 5. levely je zvýšený počet pohyblivých prekážok. V tomto levely je len jedná cesta správna (niektoré cesty sú slepé).",
     "barriers" : {
       "0": {
         "pos" : [150, 140],

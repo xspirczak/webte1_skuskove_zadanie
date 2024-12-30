@@ -288,7 +288,7 @@ const pauseTimer = () => {
 
 const resumeTimer = () => {
   if (isPaused) {
-      if (GYRO_ON)
+      if (GYRO_ON || !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
         startTimer();
   }
 };
@@ -717,5 +717,16 @@ document.getElementsByClassName("pauseGameButton")[0].addEventListener("click", 
         changingIcon.classList.remove('fa-pause');
         changingIcon.classList.add('fa-play');
     }
+});
+
+const getInformation = (level) => {
+    return level.description;
+}
+
+document.getElementById("levelInformation").addEventListener('click', () => {
+    const modal = new bootstrap.Modal(document.getElementById('informationModal'));
+    const informationDiv = document.getElementById('informationParagraph');
+    informationDiv.innerText = getInformation(currentLevel);
+    modal.show();
 });
 

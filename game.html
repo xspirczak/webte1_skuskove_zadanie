@@ -22,10 +22,12 @@
         <div class="coinsDisplay">
             Mince: <span id="coinCount">0</span>
         </div>
-
+        <div class="row my-2">
+            <i class="fa-solid fa-circle-info" id="levelInformation"></i>
+        </div>
         <button class="btn btn-primary playAgainButton"><i class="fa-solid fa-rotate-right"></i></button>
         <button class="btn btn-secondary titleScreenButton"><i class="fa-solid fa-house"></i></button>
-        <button class="btn btn-warning pauseGameButton"><i id="changingIcon" class="fa-solid fa-pause"></i></button>
+        <button class="btn btn-info pauseGameButton" style="width: 42px"><i id="changingIcon" class="fa-solid fa-pause"></i></button>
     </div>
     <canvas id="game"></canvas>
     <!-- Level Complete Modal -->
@@ -88,6 +90,16 @@
             </div>
         </div>
     </div>
+    <!-- Information Modal -->
+    <div class="modal fade bd-example-modal-sm" id="informationModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content p-3" >
+                <h3>Pomôcka</h3>
+                <p id="informationParagraph">.</p>
+            </div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/loadGame.js"></script>
     <script src="js/inputHandler.js"></script>
