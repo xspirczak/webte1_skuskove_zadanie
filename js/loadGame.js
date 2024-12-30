@@ -679,6 +679,15 @@ const modalElement = document.getElementById('orientation-warning');
 const modal = new bootstrap.Modal(modalElement);
 
 function checkOrientation() {
+
+    // Mobile or Tablet
+    const gyroBtn = document.getElementById('enable-gyro');
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        gyroBtn.classList.remove('d-none');
+    } else {
+        gyroBtn.classList.add('d-none');
+    }
+
     if (window.innerHeight > window.innerWidth) {
         // Portrait mode
         modal.show();

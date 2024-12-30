@@ -13,7 +13,8 @@
 </head>
 <body>
     <div id="gameOverlay">
-        <button id="enable-gyro">Povoliť gyroskop</button>
+        <button class="btn btn-danger mb-1 d-none" id="enable-gyro">Povoliť gyroskop</button>
+
         <div class="timerDisplay">
             Čas: <span id="timeElapsed">0</span> minút
         </div>
@@ -21,6 +22,7 @@
         <div class="coinsDisplay">
             Mince: <span id="coinCount">0</span>
         </div>
+
         <button class="btn btn-primary playAgainButton"><i class="fa-solid fa-rotate-right"></i></button>
         <button class="btn btn-secondary titleScreenButton"><i class="fa-solid fa-house"></i></button>
         <button class="btn btn-warning pauseGameButton"><i id="changingIcon" class="fa-solid fa-pause"></i></button>
