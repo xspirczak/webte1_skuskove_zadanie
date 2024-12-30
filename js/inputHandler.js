@@ -65,3 +65,63 @@ window.addEventListener("deviceorientation", function(event) {
     if (Math.abs(gyroX) < 10) vxl = RESET_VELOCITY;
     if (Math.abs(gyroY) < 10) vy = RESET_VELOCITY;
 });
+
+
+navigator.permissions.query({ name: "accelerometer" }).then((result) => {
+    if (result.state === "denied") {
+        console.log("Permission to use accelerometer sensor is denied.");
+        return;
+    }
+    // Use the sensor.
+});
+
+
+const sensor = new AbsoluteOrientationSensor();
+sensor.start();
+sensor.addEventListener("error", (error) => {
+    if (event.error.name === "SecurityError")
+        console.log("No permissions to use AbsoluteOrientationSensor.");
+});
+
+// Po načítaní stránky
+document.addEventListener("DOMContentLoaded", function () {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+        DeviceOrientationEvent.requestPermission()
+            .then(permissionState => {
+                if (permissionState === "granted") {
+                    console.log("Povolenie udelené.");
+                    startGyroTest();
+                } else {
+                    console.log("Povolenie zamietnuté.");
+                }
+            })
+            .catch(error => console.error("Chyba pri žiadaní povolenia: ", error));
+    } else {
+        console.log("Prehliadač nevyžaduje povolenie.");
+        startGyroTest();
+    }
+});
+
+// Funkcia pre testovanie gyroskopu
+function startGyroTest() {
+    window.addEventListener("deviceorientation", function(event) {
+        console.log(`Beta (X): ${event.beta}, Gamma (Y): ${event.gamma}`);
+
+        // Mapovanie hodnôt gyroskopu na pohyb
+        if (event.beta > 15) {
+            vxl = -VELOCITY;
+        } else if (event.beta < -15) {
+            vxl = VELOCITY;
+        } else {
+            vxl = RESET_VELOCITY;
+        }
+
+        if (event.gamma > 15) {
+            vy = -VELOCITY;
+        } else if (event.gamma < -15) {
+            vy = VELOCITY;
+        } else {
+            vy = RESET_VELOCITY;
+        }
+    });
+}
