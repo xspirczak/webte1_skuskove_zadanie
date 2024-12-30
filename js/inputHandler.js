@@ -1,5 +1,6 @@
 const VELOCITY = 3;
 const RESET_VELOCITY = 0;
+let GYRO_ON = false;
 
 addEventListener("keydown", function(e) {
     //WASD
@@ -63,6 +64,9 @@ document.getElementById("enable-gyro").addEventListener("click", () => {
             .then(permissionState => {
                 if (permissionState === "granted") {
                     alert("Gyroskop povolený.");
+                    GYRO_ON = true;
+                    startTimer();
+                    //resumeTimer();
                     startGyroscope();
                 } else {
                     alert("Gyroskop zamietnutý.");
@@ -71,6 +75,8 @@ document.getElementById("enable-gyro").addEventListener("click", () => {
             .catch(console.error);
     } else {
         alert("Povolenie nie je potrebné na tomto zariadení.");
+        GYRO_ON = true;
+        startTimer();
         startGyroscope();
     }
 });

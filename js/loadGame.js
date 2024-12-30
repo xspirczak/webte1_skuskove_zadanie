@@ -144,7 +144,6 @@ const updateLocalStorageCoins = (level, nCoins, ) => {
             console.log(localStorageTimes[i], -1)
 
             if (( i === level.id && localStorageTimes[i] > elapsedTime.toFixed(2) ) || ( i === level.id && localStorageTimes[i] === -1 )) {
-                console.log("here")
                 timesData[i] = elapsedTime.toFixed(2);
             } else {
                 timesData[i] = localStorageTimes[i];
@@ -257,6 +256,7 @@ let isPaused = false;
 let pausedTime = 0;
 
 const startTimer = () => {
+    console.log("STARTING 111")
     if (!isPaused) {
         levelStartTime = Date.now();
     } else {
@@ -288,7 +288,8 @@ const pauseTimer = () => {
 
 const resumeTimer = () => {
   if (isPaused) {
-      startTimer();
+      if (GYRO_ON)
+        startTimer();
   }
 };
 
@@ -584,7 +585,10 @@ const startGame = () => {
             let loadedImages = 0;
             const checkAllLoaded = () => {
                 if (loadedImages === 7) {
-                    startTimer();
+                    // If user is on mobile gyroscope has to be on before starting the timer
+                    // If user is using pc web browser we start the timer
+                    if (GYRO_ON || !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
+                        startTimer();
                     gameLoop(barrierH, barrierV, player, gate, coin, cactus, flame);
                 }
             };
