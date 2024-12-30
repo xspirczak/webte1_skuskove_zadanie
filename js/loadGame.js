@@ -55,8 +55,6 @@ const setUpMouseMovement = () => {
     });
 };
 
-
-
 const getQueryParams = () => {
     const params = {};
     const queryString = window.location.search;
@@ -69,11 +67,25 @@ const getQueryParams = () => {
     return params;
 };
 
+const canPlayLevel = (levelId) => {
+    const localStorageLevels = JSON.parse(localStorage.getItem('levels'));
+    if (parseInt(levelId) === 0)
+        return true;
+
+    for (let id = 0; id < Object.values(localStorageLevels).length; id++) {
+        if (id === parseInt(levelId-1) ) {
+            return localStorageLevels[id];
+        }
+    }
+}
+
 window.addEventListener("DOMContentLoaded", () => {
     const queryParams = getQueryParams();
     const levelId = queryParams.levelId;
 
-    if (levelId) {
+    const canPlay = canPlayLevel(levelId);
+
+    if (levelId && canPlay) {
         fetch('../assets/levels.json')
         //fetch('https://webte1.fei.stuba.sk/~xspirczak/skuskove_zadanie/assets/levels.json')
             .then(response => response.json())
@@ -91,6 +103,10 @@ window.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => console.error('Error fetching levels:', error));
     } else {
+        const gameOverlay = document.getElementById('gameOverlay');
+        gameOverlay.style.display = 'none';
+        alert("Na odomknutie tohto levelu musíte splniť level predtým!");
+        setTimeout(mainMenu, 2000);
         console.error('No levelId provided in query parameters');
     }
 });

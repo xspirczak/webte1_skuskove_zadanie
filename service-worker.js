@@ -47,12 +47,12 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', e => {
-    console.log("service worker: installed")
+    //console.log("service worker: installed")
     e.waitUntil(
         caches
             .open(CACHE_NAME)
             .then(cache => {
-                console.log("Service worker: Caching files");
+                //console.log("Service worker: Caching files");
                 cache.addAll(urlsToCache);
             })
             .then(() => self.skipWaiting())
@@ -60,13 +60,13 @@ self.addEventListener('install', e => {
 })
 
 self.addEventListener('activate', e => {
-    console.log("service worker: activated")
+    //console.log("service worker: activated")
     e.waitUntil(
         caches.keys().then(cacheNames => {
             return Promise.all(
                 cacheNames.map(cache => {
                     if (cache !== CACHE_NAME) {
-                        console.log("Service worker: Clearing old cache");
+                        //console.log("Service worker: Clearing old cache");
                         return caches.delete(cache);
                     }
                 })
@@ -76,7 +76,7 @@ self.addEventListener('activate', e => {
 })
 
 self.addEventListener('fetch', e => {
-    console.log("Service Worker: Fetching");
+    //console.log("Service Worker: Fetching");
     e.respondWith(
         fetch(e.request).catch(() => caches.match(e.request))
     );
