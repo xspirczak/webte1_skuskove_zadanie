@@ -34,5 +34,43 @@
 
     <script src="js/main.js"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (typeof DeviceMotionEvent.requestPermission === "function") {
+                DeviceMotionEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === "granted") {
+                            console.log("Prístup k senzorom povolený.");
+                            window.addEventListener("deviceorientation", handleGyro);
+                        } else {
+                            console.error("Prístup k senzorom zamietnutý.");
+                        }
+                    })
+                    .catch(error => console.error("Chyba pri žiadaní o povolenie: ", error));
+            } else {
+                // Prehliadače, ktoré povolenie nevyžadujú
+                console.log("Prehliadač nevyžaduje povolenie na gyroskop.");
+                window.addEventListener("deviceorientation", handleGyro);
+            }
+        });
+
+        function handleGyro(event) {
+            if (event.beta !== null || event.gamma !== null) {
+                console.log(`beta: ${event.beta}, gamma: ${event.gamma}`);
+                // Aktualizuj pohyb panáčika podľa gyroskopických údajov
+            } else {
+                console.log("Gyroskopické údaje nie sú dostupné.");
+            }
+        }
+
+        window.addEventListener("deviceorientation", function(event) {
+            console.log(`alpha: ${event.alpha}, beta: ${event.beta}, gamma: ${event.gamma}`);
+        });
+
+        window.addEventListener("deviceorientation", function(event) {
+            document.body.innerText = `beta: ${event.beta}, gamma: ${event.gamma}`;
+        });
+    </script>
+
 </body>
 </html>

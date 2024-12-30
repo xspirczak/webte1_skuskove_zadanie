@@ -89,31 +89,5 @@
     <script src="js/loadGame.js"></script>
     <script src="js/inputHandler.js"></script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (typeof DeviceMotionEvent.requestPermission === 'function') {
-                // Prehliadače ako Safari vyžadujú výslovné povolenie
-                DeviceMotionEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            console.log("Prístup k senzorom povolený.");
-                            window.addEventListener("deviceorientation", handleGyro);
-                        } else {
-                            console.error("Prístup k senzorom zamietnutý.");
-                        }
-                    })
-                    .catch(error => console.error("Chyba pri žiadaní o povolenie: ", error));
-            } else {
-                // Prehliadače, ktoré nevyžadujú povolenie
-                window.addEventListener("deviceorientation", handleGyro);
-            }
-        });
-
-        function handleGyro(event) {
-            console.log(`beta: ${event.beta}, gamma: ${event.gamma}`);
-            // Tu spracuj pohyb
-        }
-    </script>
-
 </body>
 </html>
