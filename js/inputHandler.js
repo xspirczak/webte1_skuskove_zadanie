@@ -28,100 +28,54 @@ addEventListener("keyup", function(e) {
     if (e.code === 'ArrowDown') vy = RESET_VELOCITY;
 });
 
-// Pridanie detekcie gyroskopu (náklon zariadenia)
-let gyroX = 0;
-let gyroY = 0;
+function handleDeviceOrientation(event) {
+    const gyroX = event.beta;  // Naklonenie hore/dole
+    const gyroY = event.gamma; // Naklonenie doľava/doprava
 
-window.addEventListener("deviceorientation", function(event) {
-    // Získanie hodnot beta a gamma
-    gyroX = event.beta;  // Otočenie okolo X osi (horizontálne naklonenie)
-    gyroY = event.gamma; // Otočenie okolo Y osi (vertikálne naklonenie)
+    const THRESHOLD = 15; // Prah pre detekciu náklonu
 
-    // Nastavenie pohybu na základe gyroskopu
-    // X (beta) - naklonenie doľava a doprava
-    // Y (gamma) - naklonenie hore a dole
-
-    // Mapovanie hodnôt z gyroskopu na pohyb
-    if (gyroX > 15) { // Ak je náklon doľava
-        vxl = -VELOCITY;
-    } else if (gyroX < -15) { // Ak je náklon doprava
-        vxl = VELOCITY;
+    // Ovládanie doprava/doľava (gyroY)
+    if (gyroY > THRESHOLD) {
+        vxr = VELOCITY; // Doprava
+    } else if (gyroY < -THRESHOLD) {
+        vxl = -VELOCITY; // Doľava
     } else {
+        vxr = RESET_VELOCITY;
         vxl = RESET_VELOCITY;
     }
 
-    if (gyroY > 15) { // Ak je náklon hore
-        vy = -VELOCITY;
-    } else if (gyroY < -15) { // Ak je náklon dole
-        vy = VELOCITY;
+    // Ovládanie hore/dole (gyroX)
+    if (gyroX > THRESHOLD) {
+        vy = VELOCITY; // Dole
+    } else if (gyroX < -THRESHOLD) {
+        vy = -VELOCITY; // Hore
     } else {
         vy = RESET_VELOCITY;
     }
-});
+}
 
-// Ak chceš pridať aj resetovanie hodnot, keď nie je pohyb:
-window.addEventListener("deviceorientation", function(event) {
-    // Vyčisti pohyb ak nie je žiadny výrazný náklon
-    if (Math.abs(gyroX) < 10) vxl = RESET_VELOCITY;
-    if (Math.abs(gyroY) < 10) vy = RESET_VELOCITY;
-});
+// Pridanie event listeneru pre gyroskop
+function startGyroscope() {
+    window.addEventListener("deviceorientation", handleDeviceOrientation);
+}
 
-
-navigator.permissions.query({ name: "accelerometer" }).then((result) => {
-    if (result.state === "denied") {
-        console.log("Permission to use accelerometer sensor is denied.");
-        return;
-    }
-    // Use the sensor.
-});
-
-
-const sensor = new AbsoluteOrientationSensor();
-sensor.start();
-sensor.addEventListener("error", (error) => {
-    if (event.error.name === "SecurityError")
-        console.log("No permissions to use AbsoluteOrientationSensor.");
-});
-
-// Po načítaní stránky
-document.addEventListener("DOMContentLoaded", function () {
+document.getElementById("enable-gyro").addEventListener("click", () => {
     if (typeof DeviceOrientationEvent.requestPermission === "function") {
         DeviceOrientationEvent.requestPermission()
             .then(permissionState => {
                 if (permissionState === "granted") {
-                    console.log("Povolenie udelené.");
-                    startGyroTest();
+                    alert("Gyroskop povolený.");
+                    startGyroscope();
                 } else {
-                    console.log("Povolenie zamietnuté.");
+                    alert("Gyroskop zamietnutý.");
                 }
             })
-            .catch(error => console.error("Chyba pri žiadaní povolenia: ", error));
+            .catch(console.error);
     } else {
-        console.log("Prehliadač nevyžaduje povolenie.");
-        startGyroTest();
+        alert("Povolenie nie je potrebné na tomto zariadení.");
+        startGyroscope();
     }
 });
 
-// Funkcia pre testovanie gyroskopu
-function startGyroTest() {
-    window.addEventListener("deviceorientation", function(event) {
-        console.log(`Beta (X): ${event.beta}, Gamma (Y): ${event.gamma}`);
 
-        // Mapovanie hodnôt gyroskopu na pohyb
-        if (event.beta > 15) {
-            vxl = -VELOCITY;
-        } else if (event.beta < -15) {
-            vxl = VELOCITY;
-        } else {
-            vxl = RESET_VELOCITY;
-        }
 
-        if (event.gamma > 15) {
-            vy = -VELOCITY;
-        } else if (event.gamma < -15) {
-            vy = VELOCITY;
-        } else {
-            vy = RESET_VELOCITY;
-        }
-    });
-}
