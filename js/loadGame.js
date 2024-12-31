@@ -200,7 +200,7 @@ const updateLocalStorageCoins = (level, nCoins, ) => {
             timesData[i] = elapsedTime.toFixed(2);
         } else {
             coinsData[i] = localStorageCoins[i];
-            console.log(localStorageTimes[i], -1)
+            //console.log(localStorageTimes[i], -1)
 
             if (( i === level.id && localStorageTimes[i] > elapsedTime.toFixed(2) ) || ( i === level.id && localStorageTimes[i] === -1 )) {
                 timesData[i] = elapsedTime.toFixed(2);
@@ -315,7 +315,7 @@ let isPaused = false;
 let pausedTime = 0;
 
 const startTimer = () => {
-    console.log("STARTING 111")
+    //console.log("STARTING 111")
     if (!isPaused) {
         levelStartTime = Date.now();
     } else {
