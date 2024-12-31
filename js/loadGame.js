@@ -564,25 +564,29 @@ const gameLoop = (imageH, imageV, player, gate, coin, cactus ,flame) => {
     const barriers = Array.isArray(currentLevel.barriers) ? currentLevel.barriers : Object.values(currentLevel.barriers);
 
     if (!isPaused) {
-        if (x + vxl >= 0) {
-            const nextX = x + vxl;
+        const combinedVx = vxr + vxl;
+
+        let adjustedVx = combinedVx;
+        let adjustedVy = vy;
+
+        if (combinedVx !== 0 && vy !== 0) {
+            const factor = VELOCITY / Math.sqrt(2);
+            adjustedVx = (combinedVx > 0 ? factor : -factor);
+            adjustedVy = (vy > 0 ? factor : -factor);
+        }
+
+        if (x + adjustedVx >= 0) {
+            const nextX = x + adjustedVx;
             const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
             if (!collided) x = nextX;
         }
 
-        if (x + vxr + (80*SCALE_X) <= canvas.width) {
-            const nextX = x + vxr;
-            const collided = barriers.some(barrier => checkCollisionBarrier(nextX, y, barrier));
-            if (!collided) x = nextX;
-        }
-
-        if (y + vy >= 0 && y + vy + (80*SCALE_X) <= canvas.height) {
-            const nextY = y + vy;
+        if (y + adjustedVy >= 0 && y + adjustedVy + (80 * SCALE_X) <= canvas.height) {
+            const nextY = y + adjustedVy;
             const collided = barriers.some(barrier => checkCollisionBarrier(x, nextY, barrier));
             if (!collided) y = nextY;
         }
     }
-
 
     if (currentLevel && currentLevel.coins) {
         displayCoins(coin)
